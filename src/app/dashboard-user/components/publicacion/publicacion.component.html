@@ -1,0 +1,143 @@
+<div class="container">
+  <div class="row">
+    <div>
+    </div>
+    <mat-card id="targeta-publicaciones" *ngFor="let item of _publicacion.publicaciones"
+      class="example-card p-3 mb-2 bg-light text-dark">
+      <mat-card-header [routerLink]="['/dashboard/view_perfil', item.user.id]" class="rounded mouse">
+        <div mat-card-avatar class="example-header-image">
+          <picture>
+            <img *ngIf="item.user" class="rounded-circle perfil-img rounded" height="40px" width="100%"
+              src="{{item.user.foto}}" alt="Perfil user">
+            ​</picture>
+        </div>
+        <mat-card-title>
+          <h6>{{item.title}}</h6>
+        </mat-card-title>
+        <mat-card-subtitle class="text-black">
+          <p>
+            <span *ngIf="item.user && item.user.username !== 'origin'">
+              {{item.user.username  || 'PublicidadPorInternet'}}
+            </span>
+            <span *ngIf="item.user && item.user.username === 'origin' && item.autocreo">
+              {{'Empresa '+item.title}}
+            </span>
+            <br>
+            <span>
+              {{ item.createdAt | amDateFormat: 'YYYY-MM-DD HH:mm' }}
+            </span>
+          </p>
+        </mat-card-subtitle>
+      </mat-card-header>
+      <a href="{{item.content}}" target="blank">
+        <img *ngIf="item.type == 'img'" mat-card-image src="{{item.content}}" alt="Foto de Publicacion"
+          class="imagen rounded">
+      </a>
+      <div *ngIf="item.type == 'url'" fxLayoutAlign="center center" fxLayout="column">
+        <div>
+          <a href="{{item.content}}" target="blank">
+            <img src="{{item.imgdefault || 'https://s3.amazonaws.com/publihazclick/default/fondoTareas.jpg' }}"
+              mat-card-image alt="Foto de Publicacion" class="imagen rounded">
+          </a>
+        </div>
+        <!-- <strong>
+          <p class="font-text">
+            {{item.descripcion}}
+          </p>
+        </strong> -->
+
+      </div>
+      <div class="column container" style="height: 500px; overflow: scroll; overflow-x: hidden">
+        <label>Descripcion:</label>
+        <div class="col textInf" [innerHtml]="item.descripcion">
+        </div>
+      </div>
+      <!-- <div class="form-group">
+        <label for="exampleFormControlTextarea1">Descripcion</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled [(ngModel)]="item.descripcion"></textarea>
+      </div> -->
+      <!-- <h4><a href="{{item.content}}" target="blank">
+          <p style="overflow: hidden;" class="font-text">{{item.descripcion}}</p>
+        </a></h4> -->
+      <mat-card-content>
+        <p>
+          <!-- {{item.content}} -->
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <div class="d-flex justify-content-between">
+          <div>
+            <span class="mouse tanicon p-3" (click)="like(item, 'megusta')" [ngClass]="{
+                'checklike': item.disablelike === 'megusta'
+              }">
+              <i class="fas fa-thumbs-up fa-2x p-1"></i>
+              {{ item.megusta || 0 }}
+            </span>
+            <span class="mouse tanicon p-3" (click)="like(item, 'nomegusta')" [ngClass]="{
+                'checklike': item.disablelike === 'nomegusta'
+              }">
+              <i class="fas fa-thumbs-up fa-2x translate p-1"></i>
+              {{ item.nomegusta || 0 }}
+            </span>
+          </div>
+          <div>
+            <span class="mouse tanicon p-3" (click)="initshare(item)" [matMenuTriggerFor]="menu">
+              <i class="fas fa-share fa-2x"></i>
+            </span>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item shareButton="facebook" [url]="data.urlshare" [image]="data.urlimg"
+                [description]="data.descripcion">
+                <i class="fab fa-facebook-f fa-1x"> facebook</i>
+              </button>
+              <button mat-menu-item shareButton="twitter" [url]="data.urlshare" [image]="data.urlimg"
+                [description]="data.descripcion">
+                <i class="fab fa-twitter fa-1x">Twitter</i>
+              </button>
+              <button mat-menu-item shareButton="whatsapp" [url]="data.urlshare" [image]="data.urlimg"
+                [description]="data.descripcion">
+                <i class="fab fa-whatsapp fa-1x">Whatsapp</i>
+              </button>
+            </mat-menu>
+          </div>
+        </div>
+      </mat-card-actions>
+      <div fxLayout="column">
+        <mat-list fxLayout="column">
+          <mat-list-item fxFlex role="listitem" class="men" *ngFor="let link of item.comentario"
+            (click)="checkdelete(link)">
+            <div fxFlex fxLayout="row" class="mat-elevation-z3 m">
+              <img src="{{ link.user.foto }}" class="rounded-circle perfil-img" height="40px" width="50px" alt="None"
+                [routerLink]="['/dashboard/view_perfil', link.user.id]" class="rounded pointer">
+              <h6 fxFlex fxLayout="column" class="font">
+                <div fxFlex [routerLink]="['/dashboard/view_perfil', link.user.id]" class="rounded pointer">
+                  {{ link.user.username }}
+                </div>
+                <div fxFlex>
+                  {{ link.comentarios.content }}
+                </div>
+                <div fxFlex>
+                  {{ link.createdAt | amDateFormat: 'YYYY-MM-DD HH:mm' }}
+                </div>
+              </h6>
+              <button mat-button type="button" mat-mini-fab color="warn" *ngIf="link.check"
+                (click)="deletepublicacion(link, item.comentario)">
+                <i class="fas fa-times fa-2x"></i>
+              </button>
+            </div>
+          </mat-list-item>
+        </mat-list>
+        <form fxLayout="row" class="" [formGroup]="comenForm" (ngSubmit)="pushComentario(comenForm.value, item)">
+          <mat-form-field fxFlex class="example-full-width">
+            <input matInput placeholder="Comentario" autocomplete="off" formControlName="content">
+          </mat-form-field>
+          <div class="p-3">
+            <button type="button" class="btn btn-success textInf" type="submit">Comentar</button>
+          </div>
+        </form>
+      </div>
+    </mat-card>
+    <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+      (page)="setPageSizeOptions(_model, _publicacion, $event)">
+    </mat-paginator>
+  </div>
+</div>

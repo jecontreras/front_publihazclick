@@ -1,0 +1,33 @@
+<div class="content container">
+  <div class="column container mat-elevation-z5 p-3 mb-2">
+    <div class="">
+      <h5>Quejas Y Reclamos</h5>
+    </div>
+    <div class="column">
+      <div class="row">
+        <div class="md-form col-md-6">
+          <label for="Form-name5" >Titulo de la Queja o Reclamos</label>
+          <input
+             type="text"
+             required
+             [(ngModel)]="data.titulo"
+             placeholder="Titulo"
+             class="form-control white-text"
+         >
+        </div>
+      </div>
+      <div class="row">
+        <mat-form-field
+          class="example-full-width col"
+        >
+          <textarea
+            matInput
+            placeholder="Descripcion"
+            [(ngModel)]="data.descripcion"
+          ></textarea>
+        </mat-form-field>
+      </div>
+      <button (click)="submit()" type="button" name="button" class="btn btn-success">Enviar</button>
+    </div>
+  </div>
+</div>

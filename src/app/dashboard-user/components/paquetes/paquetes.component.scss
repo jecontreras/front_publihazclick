@@ -1,0 +1,91 @@
+.p {
+  padding: 10px;
+}
+.m {
+  margin: 10px;
+}
+.separa {
+  padding: 20px;
+  margin: 20px;
+}
+.pointer {
+  cursor: pointer;
+}
+.separar{
+  margin-right: 6%;
+}
+.disable {
+  opacity: 0.5;
+}
+.img {
+  width: 90%;
+  height: 80%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.img2 {
+  width: 70%;
+  height: 60%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.font {
+  font-size: 10px;
+}
+.ancho {
+  width: 46%;
+}
+.ancho {
+  margin-left: -40px;
+  margin-right: -62px;
+  padding: 10px;
+}
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .ancho {
+    width: 85%;
+  }
+  .textInf {
+    font-size: 11px;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .ancho {
+    width: 46%;
+  }
+  .textInf {
+    font-size: 12px;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .ancho {
+    width: 45%;
+  }
+  .textInf {
+    font-size: 13px;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .ancho {
+    width: 46%;
+  }
+  .textInf {
+    font-size: 14px;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .ancho {
+    width: 39%;
+  }
+  .textInf {
+    font-size: 15px;
+  }
+}

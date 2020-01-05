@@ -1,0 +1,105 @@
+<div class="container">
+  <h1>Calculadora de Ganancias <i class="fas fa-calculator"></i></h1>
+  <hr>
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead class="thead-dark" style="text-align: center">
+        <tr>
+          <th>Concepto</th>
+          <th>Valor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="col">Categoria</th>
+          <th scope="col">xxxxxxxxxxxxxxxxxxxxxxxxxxx</th>
+        </tr>
+        <tr>
+          <th scope="col"># Referidos</th>
+          <th scope="col">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">#</span>
+              </div>
+              <form (ngSubmit) = 'calcular()'>
+                <input type="number" 
+                [(ngModel)] = 'cantidadReferidos'
+                class="form-control chat-input"
+                name="cantidadReferidos"
+                placeholder="# Referidos..."
+                autofocus
+                autocomplete="off">
+              </form>
+                <button (click)="calcular()" class="btn btn-primary"><i class="fas fa-angle-right"></i></button>
+            </div>
+          </th>
+        </tr>
+        <tr>
+          <th scope="col">RECOMP. ACTIVACION DE TUS INVITADOS </th>
+          <th scope="col">xxxxxxxxxxxxxxxxxxxxxxxxxxx</th>
+        </tr>
+        <tr>
+          <th scope="col">
+            <p>GANANCIAS DIARIAS Y MENSUAL POR TUS
+              PROPIOS CLICKS</p>
+          </th>
+          <th scope="col">xxxxxxxxxxxxxxxxxxxxxxxxxxx</th>
+        </tr>
+        <tr>
+          <th scope="col">
+            <p>CANTIDAD DE MINIANUNCIOS QUE RECIBIRAS <br>
+              DIARIAMENTE COMO OBSEQUIO SEGÚN EL NUMERO DE INVITADOS QUE TENGAS</p>
+          </th>
+          <th scope="col">xxxxxxxxxxxxxxxxxxxxxxxxxxx</th>
+        </tr>
+        <tr>
+          <th scope="col">
+            <p>GANANCIA MENSUAL EN MINIANUNCIOS DE <br>
+              ACUERDO AL NUMERO MAXIMO DE INVITADOS QUE TENGAS EN CADA CATEGORIA</p>
+          </th>
+          <th scope="col">xxxxxxxxxxxxxxxxxxxxxxxxxxx</th>
+        </tr>
+        <tr>
+          <th scope="col">VALOR A PAGAR POR LOS CLICKS DE CADA INVITADO</th>
+          <th scope="col">xxxxxxxxxxxxxxxxxxxxxxxxxxx</th>
+        </tr>
+        <tr>
+          <th scope="col">RECOMP DIARIA QUE OBTIENES POR LAS TAREAS DE CADA INVITADO </th>
+          <th scope="col">xxxxxxxxxxxxxxxxxxxxxxxxxxx</th>
+        </tr>
+        <tr>
+          <th scope="col">RECOMP. CLICKS/MES</th>
+          <th scope="col">xxxxxxxxxxxxxxxxxxxxxxxxxxx</th>
+        </tr>
+        <tr>
+          <th scope="col">TOTAL DE GANACIA MENSUAL QUE TE GENERA CADA INVITADO </th>
+          <th scope="col">xxxxxxxxxxxxxxxxxxxxxxxxxxx</th>
+        </tr>
+        <tr class="table-success">
+          <th scope="col">
+            <p>TOTAL DE GANANCIA MENSUAL QUE TE GENERA
+            </p>
+          </th>
+          <th scope="col">xxxxxxxxxxxxxxxxxxxxxxxxxxx</th>
+        </tr>
+
+
+
+        <!-- <tr>
+            <th scope="row">1</th>
+            <td>xxxx</td>
+            <td><input type="text" class="form-control" placeholder="# Referidos" aria-label="Username" aria-describedby="basic-addon1"></td>
+            <td>xxx</td>
+            <td>xxxx</td>
+            <td>xxxx</td>
+            <td>xxx</td>
+            <td>xxxx</td>
+            <td>xxxx</td>
+            <td>xxx</td>
+            <td>xxxx</td>
+          </tr> -->
+
+      </tbody>
+    </table>
+  </div>
+</div>

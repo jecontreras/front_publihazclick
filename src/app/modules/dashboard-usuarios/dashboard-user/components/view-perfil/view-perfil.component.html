@@ -1,0 +1,72 @@
+<div class="container content">
+  <div class="container mat-elevation-z5 column">
+    <div class="row p-3 mb-2 bg-primary text-white rounded">
+      <div class="col">
+        <h5>Informacion de Usuario</h5>
+      </div>
+    </div>
+    <div *ngIf="progreses">
+      <div fxLayout="row" fxLayoutAlign="center center"fxFill>
+        <div fxLayout="row" fxLayoutAlign="center center">
+          <mat-spinner>
+          </mat-spinner>
+        </div>
+      </div>
+    </div>
+    <div class="column" *ngIf="!progreses">
+      <h6 class="mat-elevation-z5 col row">
+        <div class="p rounded">
+          <img [src]="data.foto" alt="none" width="100px" height="120px">
+        </div>
+        <div class="column col p-3">
+          <div class="col">
+            <label class="text textInf">Nombre de Usuario</label>
+            <span class="textInf">{{ data.username }}</span>
+          </div>
+          <div class="col">
+            <label class="text textInf">Nombre: </label>
+            <span class="textInf">{{ data.name }}</span>
+          </div>
+          <div class="col">
+            <label class="text textInf">Nivel: </label>
+            <span class="textInf">{{ data.nivel }}</span>
+          </div>
+          <!-- <div class="col">
+            <label class="text textInf">Email: </label>
+            <span class="textInf">{{ data.email }}</span>
+          </div> -->
+          <div class="col">
+            <label class="text textInf">Numero de Celular: </label>
+            <span class="textInf">{{ data.celular }}</span>
+          </div>
+        </div>
+      </h6>
+    </div>
+    <div class="column" *ngIf="!progreses">
+      <br>
+      <div class="row">
+        <div class="col-sm-6" *ngFor="let item of list_product">
+          <a href="{{item.content}}" target="blank">
+            <mat-card class="example-card">
+              <mat-card-header>
+                <img [src]="item.user.foto" mat-card-avatar>
+                <mat-card-title>{{ item.title }}</mat-card-title>
+                <mat-card-subtitle>{{ item.user.username }}</mat-card-subtitle>
+              </mat-card-header>
+              <img [src]="item.content" mat-card-image *ngIf="item.type == 'img'">
+              <img [src]="item.imgdefault" mat-card-image *ngIf="item.type !== 'img'">
+              <mat-card-content>
+                <p [innerHtml]="item.descripcion">
+                </p>
+              </mat-card-content>
+            </mat-card>
+          </a>
+          <br>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+</div>

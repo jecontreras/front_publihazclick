@@ -1,0 +1,68 @@
+<div class="container content">
+  <div
+    class="container mat-elevation-z5 column"
+  >
+    <div
+      class="row p-3 mb-2 bg-primary text-white rounded"
+    >
+      <div
+        class="col"
+      >
+        <h5>Información de mi Líder</h5>
+      </div>
+    </div>
+    <div
+      class="column"
+    >
+      <h6
+        class="mat-elevation-z5 col row"
+      >
+        <div
+          class="p"
+        >
+          <img
+              [src]="data.cabeza.foto"
+              alt="none"
+              width="100px"
+              height="120px"
+          >
+        </div>
+        <div
+          class="column col p-3"
+        >
+          <div
+            class="col"
+          >
+            <label class="text textInf">Nombre de Usuario / Avatar: </label>
+            <span class="textInf">{{ data.cabeza.username }}</span>
+          </div>
+          <div
+            class="col"
+          >
+            <label class="text textInf">Nombre: </label>
+            <span class="textInf">{{ data.cabeza.name }}</span>
+          </div>
+          <div
+            class="col"
+          >
+            <label class="text textInf">Nivel: </label>
+            <span class="textInf">{{ data.cabeza.nivel }}</span>
+          </div>
+          <div
+            class="col"
+          >
+            <label class="text textInf">Email: </label>
+            <span class="textInf">{{ data.cabeza.email }}</span>
+          </div>
+          <div
+            class="col"
+          >
+            <label class="text textInf">Numero de Celular: </label>
+            <span class="textInf">{{ data.cabeza.celular }}</span>
+          </div>
+        </div>
+      </h6>
+    </div>
+  </div>
+
+</div>

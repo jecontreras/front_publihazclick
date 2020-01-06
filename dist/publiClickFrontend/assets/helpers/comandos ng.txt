@@ -1,0 +1,12 @@
+// generar proyecto
+ng new nombre-proyecto
+// generar componente
+ng g c dashboard-user/components/nombre-componente --nospec --module dashboard
+//generar vista
+ng g c dashboard-user/views/nombre-componente --nospec --module dashboard
+//generar pipe/filtros
+ng g p dashboard-user/pipes/nombre-pipe --nospec --module dashboard
+//generar servicio
+ng g s dashboard-user/services/nombre-servicio --nospec --module dashboard
+//correr proyecto
+ng serve 

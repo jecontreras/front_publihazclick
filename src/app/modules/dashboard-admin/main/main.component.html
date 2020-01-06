@@ -23,8 +23,12 @@
             </div>
             <div id="datatables_filter" class="dataTables_filter">
               <label class="form-group">
-                <input (keypress)="buscar($event)" [(ngModel)]="datoBusqueda" type="search"
-                  class="form-control form-control-sm" placeholder="Buscar Usuario" aria-controls="datatables"></label>
+                <input [(ngModel)]="datoBusqueda" type="search" class="form-control form-control-sm"
+                  placeholder="Buscar Usuario" aria-controls="datatables"></label>
+              <button (click)="buscar()" [disabled]="loader" mat-raised-button mat-min-fab
+                class="btn btn-primary btn-just-icon btn-round">
+                <i class="material-icons">search</i>
+              </button>
             </div>
             <div class="material-datatables" *ngIf="!loader">
               <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0"
@@ -172,8 +176,8 @@
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label class="bmd-label-floating">Codigo</label>
-                        <input type="text" name="ciudad" value="{{usuarioSeleccionado['codigo'] || 'No especifica'}}"
+                        <label class="bmd-label-floating">Pais</label>
+                        <input type="text" name="ciudad" value="{{usuarioSeleccionado['pais'] || 'No especifica'}}"
                           class="form-control" disabled>
                       </div>
                     </div>
@@ -185,18 +189,28 @@
                       </div> -->
                   </div>
                   <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                       <div class="form-group">
                         <label>Contraseña</label>
                         <div class="form-group">
                           <label class="bmd-label-floating"> Asignar nueva contraseña</label>
                           <input type="password" [(ngModel)]="contrasenaNueva" name="contrasenaNueva"
-                            class="form-control" required>
+                            class="form-control">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Correo</label>
+                        <div class="form-group">
+                          <label class="bmd-label-floating"> Asignar nuevo correo</label>
+                          <input type="email" [(ngModel)]="correoNuevo" name="correoNuevo"
+                            class="form-control">
                         </div>
                       </div>
                     </div>
                   </div>
-                  <button mat-raised-button (click)="validarContrasena()" class="btn btn-rose pull-right">Actualizar
+                  <button mat-raised-button (click)="actualizarDatos()" class="btn btn-rose pull-right">Actualizar
                     datos</button>
                   <button mat-raised-button data-dismiss="modal" class="btn btn-danger pull-right">Salir</button>
                   <div class="clearfix"></div>
@@ -215,11 +229,14 @@
               <div class="card-body">
                 <h6 class="card-category text-gray">{{ usuarioSeleccionado['rol']?.nombre || 'No especificado'}}</h6>
                 <h4 class="card-title">{{ usuarioSeleccionado['name'] || 'Alec Thompson'}}</h4>
-                <p class="card-description">
-                  {{ usuarioSeleccionado['paquete']  || 'No tiene paquetes'}}
-
-                </p>
-                <button (click)="activaPaquete()" class="btn btn-rose btn-round">Activar Paquete</button>
+                <div *ngIf="usuarioSeleccionado['paquete']">
+                  <p class="card-description text-danger" *ngIf="usuarioSeleccionado['paquete'].length > 0">
+                    {{ usuarioSeleccionado['paquete'][0].estado || 'No tiene paquetes'}} --
+                    {{ usuarioSeleccionado['paquete'][0].createdAt | date}}
+                  </p>
+                </div>
+                <button [disabled]="loaderBotones" (click)="activaPaquete()" class="btn btn-rose btn-round">Activar Paquete</button>
+                <button [disabled]="loaderBotones" (click)="reenviarCorreo()" class="btn btn-rose btn-round">Enviar activacion</button>
               </div>
             </div>
           </div>

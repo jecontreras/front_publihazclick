@@ -28,8 +28,9 @@ import { FooterModule } from './modules/shared/footer/footer.module';
 import { PageStatusComponent } from './modules/layouts/page-status/page-status.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { environment } from 'src/environments/environment';
+import { GLOBAL } from './services/global';
 const config: SocketIoConfig = {
-  url: environment.wsUrl,
+  url: GLOBAL.url,
   options: {}
 };
 @NgModule({

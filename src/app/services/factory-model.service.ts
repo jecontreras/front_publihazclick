@@ -321,8 +321,15 @@ export class FactoryModelService {
       console.log(estadoVentana);
     });
   }
-  search(query) {
-    return this._http.post(this.url + 'user/search', query).pipe(
+  post(url, query) {
+    query.app = this.adsSecuryty();
+    return this._http.post(this.url + url, query).pipe(
+      catchError(this.handleError)
+    );
+  }
+  paquete(url, query) {
+    query.app = this.adsSecuryty();
+    return this._http.post(url, query).pipe(
       catchError(this.handleError)
     );
   }

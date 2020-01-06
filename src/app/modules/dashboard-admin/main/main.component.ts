@@ -10,7 +10,7 @@ declare interface DataTable {
 }
 
 declare const $: any;
-declare const  swal: any;
+declare const swal: any;
 
 @Component({
   selector: 'app-main',
@@ -21,8 +21,10 @@ export class MainComponent implements OnInit, AfterViewInit {
   public dataTable: DataTable;
   public usuarioSeleccionado: any = {};
   public contrasenaNueva: string = "";
+  public correoNuevo: string = "";
   public loader = true;
   public datoBusqueda = '';
+  public loaderBotones = false;
   constructor(
     private _factory: FactoryModelService,
     public _usuario: UserService
@@ -34,9 +36,12 @@ export class MainComponent implements OnInit, AfterViewInit {
     };
   }
 
-  ngOnInit() {
-    // {limit: 10, skip: 10 }
-    this._factory.query('user', { limit: 10, skip: 10, populate: ['cabeza','rol'] }).subscribe(
+  ngOnInit() { 
+    this.cargarTodos();
+  }
+  ngAfterViewInit() {}
+  cargarTodos() {
+    this._factory.query('user', { limit: 10, skip: 10, populate: ['cabeza', 'rol'] }).subscribe(
       (response: any) => {
         console.log(response);
         this.dataTable.headerRow = ['Name', 'Lastname', 'Username', 'Cabeza', 'Email', 'Celular', 'Acciones'];
@@ -48,19 +53,7 @@ export class MainComponent implements OnInit, AfterViewInit {
       error => {
         console.log('Error', error);
       });
-    this._factory.search({ limit: 10, skip: 10, joins: 'cabeza', app: 'publihazclickrootadmin' }).subscribe(
-      (response: any) => {
-        console.log('search');
-        console.log(response);
-      },
-      error => {
-        console.log('Error', error);
-      });
   }
-
-  ngAfterViewInit() {
-  }
-
   config() {
     $('#datatables').DataTable({
       "pagingType": "full_numbers",
@@ -113,15 +106,15 @@ export class MainComponent implements OnInit, AfterViewInit {
       }
     };
     this._factory.query('userpaquete/consulpaquete', params)
-    .subscribe(
-      (response: any) => {
-        this.usuarioSeleccionado.paquete = response.data;
-        console.log(this.usuarioSeleccionado);
-      },
-      error => {
-        console.log('Error', error);
-      }
-    );
+      .subscribe(
+        (response: any) => {
+          this.usuarioSeleccionado.paquete = response.data;
+          console.log(this.usuarioSeleccionado);
+        },
+        error => {
+          console.log('Error', error);
+        }
+      );
   }
 
   validarContrasena() {
@@ -136,36 +129,157 @@ export class MainComponent implements OnInit, AfterViewInit {
       -No espacios en blanco
       ` , 'error');
     } else {
-      swal('Ok', `
+      this.loaderBotones = true;
+      this.usuarioSeleccionado.password = this.contrasenaNueva;
+      const query = {
+        user: this.usuarioSeleccionado
+      };
+      this._factory
+        .post(
+          'user/contrasena', query
+        ).subscribe(
+          (response: any) => {
+            console.log(response);
+            swal('Ok', `
       La contraseña se a cambiado con exito
       ` , 'success');
+      this.loaderBotones = false;
+          },
+          error => {
+            console.log('Error', error);
+            swal('Oops', `
+        Error al cambiar la contraseña
+        ` , 'error');
+        this.loaderBotones = false;
+          });
     }
   }
   activaPaquete() {
-    if (false) {
+    if (this.usuarioSeleccionado.paquete.length>0) {
       swal('Oops', `
-      Paquete no activado
+      El usuario ya tiene un paquete activo
       ` , 'error');
     } else {
-      swal('Ok', `
+      this.loaderBotones = true;
+      const url = 'https://backpublihazclick.herokuapp.com/paquete/comprado';
+      this._factory
+      .paquete(url, {
+        user: this.usuarioSeleccionado
+      }).subscribe(
+        (response: any) => {
+          console.log(response);
+          swal('Ok', `
       El paquete se activo exitosamente
       ` , 'success');
+          this.loaderBotones = false;
+        },
+        error => {
+          console.log('Error', error);
+          swal('Oops', `
+      Error al activar el paquete
+      ` , 'error');
+          this.loaderBotones = false;
+        });
     }
   }
-  buscar(evt: any) {
+  buscar() {
     this.loader = true;
+    console.log(this.datoBusqueda);
+    this.datoBusqueda = this.datoBusqueda.trim();
+    if(this.datoBusqueda === '') {
+      this.cargarTodos();
+    } else {
+      this._factory
+      .post('user/search', {
+        populate: ['cabeza', 'rol'],
+        username: {
+          'startsWith': this.datoBusqueda
+        }
+      }).subscribe(
+        (response: any) => {
+          console.log(response);
+          this.dataTable.headerRow = ['Name', 'Lastname', 'Username', 'Cabeza', 'Email', 'Celular', 'Acciones'];
+          this.dataTable.footerRow = ['Name', 'Lastname', 'Username', 'Cabeza', 'Email', 'Celular', 'Acciones'];
+          this.dataTable.dataRows = response.data;
+          this.loader = false;
+          this.config();
+        },
+        error => {
+          console.log('Error', error);
+        });
+    }
+  }
+  reenviarCorreo() {
+    this.loaderBotones = true;
+    const query = {
+      where: {
+        admin: this.usuarioSeleccionado
+      }
+    };
     this._factory
-    .query('user', { limit: 10, skip: 10,  populate: ['cabeza','rol'] , or: [ {username: { 'like': '%' +  this.datoBusqueda }}, {username: this.datoBusqueda}] }).subscribe(
-      (response: any) => {
-        console.log(response);
-        this.dataTable.headerRow = ['Name', 'Lastname', 'Username', 'Cabeza', 'Email', 'Celular', 'Acciones'];
-        this.dataTable.footerRow = ['Name', 'Lastname', 'Username', 'Cabeza', 'Email', 'Celular', 'Acciones'];
-        this.dataTable.dataRows = response.data;
-        this.loader = false;
-        this.config();
-      },
-      error => {
-        console.log('Error', error);
-      });
+      .post(
+        'user/correo', query
+      ).subscribe(
+        (response: any) => {
+          console.log(response);
+          swal('Ok', `
+      El correo se envio exitosamente
+      ` , 'success');
+      this.loaderBotones = false;
+        },
+        error => {
+          console.log('Error', error);
+          swal('Oops', `
+      Error al enviar el correo
+      ` , 'error');
+      this.loaderBotones = false;
+        });
+  }
+  validarCorreo() {
+    const regex = /^\w+([\.\+\-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
+    if (!regex.exec(this.correoNuevo)) {
+      swal('Oops', ` El correo debe cumplir los siguientes parametros: 
+      -Mayúsculas y minúsculas del alfabeto ingles.
+      -Números de 0 al 9
+      -puede contener punto pero no al inicio o repetirse.
+      -puede usar los caracteres: !#$%&'*+-/=?^_{|}~
+      ` , 'error');
+    } else {
+      this.loaderBotones = true;
+      this.usuarioSeleccionado.email = this.correoNuevo;
+      const query = {
+        user: this.usuarioSeleccionado
+      };
+      this._factory
+        .post(
+          'user/newcorreo', query
+        ).subscribe(
+          (response: any) => {
+            console.log(response);
+            swal('Ok', `
+      El correo se a cambiado con exito
+      ` , 'success');
+      this.loaderBotones = false;
+          },
+          error => {
+            console.log('Error', error);
+            swal('Oops', `
+        Error al cambiar el correo
+        ` , 'error');
+        this.loaderBotones = false;
+          });
+    }
+  }
+
+  actualizarDatos() {
+    if(this.contrasenaNueva.trim() !== '') {
+      this.validarContrasena();
+    } else if(this.correoNuevo.trim() !== '') {
+      this.validarCorreo();
+    } else {
+      swal('Oops', `
+      Estas enviando la contraseña y el correo vacios
+      ` , 'error');
+    }
   }
 }

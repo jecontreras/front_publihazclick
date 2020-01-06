@@ -25,7 +25,13 @@ import { NavbarModule } from './modules/shared/navbar/navbar.module';
 import { FixedpluginModule } from './modules/shared/fixedplugin/fixedplugin.module';
 import { SidebarModule } from './modules/sidebar/sidebar.module';
 import { FooterModule } from './modules/shared/footer/footer.module';
-
+import { PageStatusComponent } from './modules/layouts/page-status/page-status.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { environment } from 'src/environments/environment';
+const config: SocketIoConfig = {
+  url: environment.wsUrl,
+  options: {}
+};
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,12 +41,14 @@ import { FooterModule } from './modules/shared/footer/footer.module';
     VerificacionComponent,
     InfoComponent,
     AuthLayoutComponent,
-    AdminLayoutComponent
+    AdminLayoutComponent,
+    PageStatusComponent
   ],
   imports: [
     CommonModule,
     HttpClientModule,
     FroalaEditorModule.forRoot(), FroalaViewModule.forRoot(),
+    SocketIoModule.forRoot(config),
     ShareModule,
     ReactiveFormsModule,
     FormsModule,

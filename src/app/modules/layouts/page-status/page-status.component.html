@@ -1,0 +1,21 @@
+<!-- <footer class="p-2 bg-dark text-white">
+  <div class="row">
+    <div class="col-sm-6 text-left">
+      <span class="text-success text-left"> {{estadoApp || 'error'}} </span>
+    </div>
+    <div class="col-sm-6 text-right">
+      Servidor status:
+      <span *ngIf="wsSocket.socketStatus" class="text-success "> Conectado </span>
+      <span *ngIf="!wsSocket.socketStatus" class="text-danger "> Desconectado </span>
+    </div>
+  </div>
+</footer> -->
+<footer class="p-2 text-white text-center">
+      <span (click)="mostrar()" *ngIf="show" style="background-color: #484848; padding: 1em; border-radius: 10px; cursor: pointer;">
+        <span class="text-success text-left"> [{{estadoApp || 'error'}} - {{version || '0'}}] </span>
+        -
+        Servidor: 
+        <span *ngIf="wsSocket.socketStatus" class="text-success "> Conectado </span>
+        <span *ngIf="!wsSocket.socketStatus" class="text-danger "> Desconectado </span>
+      </span>
+</footer>

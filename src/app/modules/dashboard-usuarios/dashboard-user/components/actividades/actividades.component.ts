@@ -1,7 +1,7 @@
 import { Component, OnInit, VERSION, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActividadService } from '../../services/actividad.service';
-import { FactoryModelService } from '../../services/factory-model.service';
+import { FactoryModelService } from '../../../../../services/factory-model.service';
 import { PublicacionService } from '../../services/publicacion.service';
 import { ToolsService } from '../../services/tools.service';
 import * as _ from 'lodash';

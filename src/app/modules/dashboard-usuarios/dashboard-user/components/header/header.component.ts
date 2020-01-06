@@ -1,7 +1,7 @@
 import { Component, OnDestroy, ChangeDetectorRef, OnInit, VERSION, ViewChild } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { Router } from '@angular/router';
-import { FactoryModelService } from '../../services/factory-model.service';
+import { FactoryModelService } from '../../../../../services/factory-model.service';
 import { ConfiguracionService } from '../../services/configuracion.service';
 import { ToolsService } from '../../services/tools.service';
 import { GLOBAL } from '../../../../../services/global';

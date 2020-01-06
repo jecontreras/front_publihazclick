@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FactoryModelService } from '../../services/factory-model.service';
+import { FactoryModelService } from '../../../../../services/factory-model.service';
 import swal from 'sweetalert';
 import * as moment from 'moment';
 import * as _ from 'lodash';

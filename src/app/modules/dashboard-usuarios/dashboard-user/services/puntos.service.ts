@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FactoryModelService } from './factory-model.service';
+import { FactoryModelService } from '../../../../services/factory-model.service';
 import { ToolsService } from './tools.service';
 import * as _ from 'lodash';
 

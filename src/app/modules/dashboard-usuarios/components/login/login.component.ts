@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../../services/user.service';
 import { AuthService } from '../../../../services/auth.service';
 import { ToolsService } from 'src/app/modules/dashboard-usuarios/dashboard-user/services/tools.service';
-import { FactoryModelService } from 'src/app/modules/dashboard-usuarios/dashboard-user/services/factory-model.service';
+import { FactoryModelService } from 'src/app/services/factory-model.service';
 import * as _ from 'lodash';
 import { GLOBAL } from '../../../../services/global';
 import swal from 'sweetalert';

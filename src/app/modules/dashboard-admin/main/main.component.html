@@ -55,7 +55,7 @@
                     <td>{{row['name']}}</td>
                     <td>{{row['lastname']}}</td>
                     <td>{{row['username']}}</td>
-                    <td>{{row['cabeza']}}</td>
+                    <td>{{row['cabeza']?.username}}</td>
                     <!-- <td>{{row['rol']}}</td> -->
                     <td>{{row['email']}}</td>
                     <td>{{row['celular']}}</td>
@@ -213,7 +213,7 @@
                 </a>
               </div>
               <div class="card-body">
-                <h6 class="card-category text-gray">{{ usuarioSeleccionado['rol'] || 'No especificado'}}</h6>
+                <h6 class="card-category text-gray">{{ usuarioSeleccionado['rol']?.nombre || 'No especificado'}}</h6>
                 <h4 class="card-title">{{ usuarioSeleccionado['name'] || 'Alec Thompson'}}</h4>
                 <p class="card-description">
                   {{ usuarioSeleccionado['paquete']  || 'No tiene paquetes'}}

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,  HttpHeaders } from '@angular/common/http';
 import { GLOBAL } from './global';
-import { FactoryModelService } from '../modules/dashboard-usuarios/dashboard-user/services/factory-model.service';
+import { FactoryModelService } from './factory-model.service';
 
 @Injectable({
   providedIn: 'root'

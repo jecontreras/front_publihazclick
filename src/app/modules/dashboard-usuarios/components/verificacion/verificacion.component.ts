@@ -1,6 +1,6 @@
 import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FactoryModelService } from '../../dashboard-user/services/factory-model.service';
+import { FactoryModelService } from '../../../../services/factory-model.service';
 import { ToolsService } from '../../dashboard-user/services/tools.service';
 
 @Component({

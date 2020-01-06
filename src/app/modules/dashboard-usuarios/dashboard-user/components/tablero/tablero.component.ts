@@ -3,7 +3,7 @@ import { Chart } from 'chart.js';
 import * as _ from 'lodash';
 import * as moment from 'moment';
 import { TableroService } from '../../services/tablero.service';
-import { FactoryModelService } from '../../services/factory-model.service';
+import { FactoryModelService } from '../../../../../services/factory-model.service';
 
 
 @Component({

@@ -4,7 +4,7 @@ import { departamento } from '../../../json/departamentos';
 import { pais } from '../../../json/paises';
 import { GLOBAL } from '../../../../../services/global';
 import * as _ from 'lodash';
-import { FactoryModelService } from '../../services/factory-model.service';
+import { FactoryModelService } from '../../../../../services/factory-model.service';
 import swal from 'sweetalert';
 import { Indicativo } from 'src/app/modules/dashboard-usuarios/json/indicativo';
 

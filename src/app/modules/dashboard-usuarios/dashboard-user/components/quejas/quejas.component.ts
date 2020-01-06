@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FactoryModelService } from '../../services/factory-model.service';
+import { FactoryModelService } from '../../../../../services/factory-model.service';
 import { ToolsService } from '../../services/tools.service';
 
 @Component({

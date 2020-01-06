@@ -64,6 +64,7 @@
     "ngx-chips": "1.9.8",
     "ngx-editor": "^4.1.0",
     "ngx-moment": "^3.5.0",
+    "ngx-socket-io": "^3.0.1",
     "nouislider": "9.2.0",
     "path": "^0.12.7",
     "perfect-scrollbar": "1.1.0",

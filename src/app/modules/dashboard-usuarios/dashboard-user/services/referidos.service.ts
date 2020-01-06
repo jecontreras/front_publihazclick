@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,  HttpHeaders } from '@angular/common/http';
 import { GLOBAL } from '../../../../services/global';
-import { FactoryModelService } from './factory-model.service';
+import { FactoryModelService } from '../../../../services/factory-model.service';
 import * as _ from 'lodash';
 import * as moment from 'moment';
 import { ToolsService } from './tools.service';

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {PageEvent} from '@angular/material';
 import { ReferidosService } from '../../services/referidos.service';
 import * as _ from 'lodash';
-import { FactoryModelService } from '../../services/factory-model.service';
+import { FactoryModelService } from '../../../../../services/factory-model.service';
 import * as moment from 'moment';
 
 @Component({

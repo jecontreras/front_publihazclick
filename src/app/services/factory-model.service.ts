@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Config } from './Config';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { GLOBAL } from '../../../../services/global';
+import { GLOBAL } from './global';
 import { Observable } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
-import { handleError } from '../../../../services/errores';
+import { handleError } from './errores';
 import { AuthService } from 'src/app/services/auth.service';
 import * as _ from 'lodash';
 import * as moment from 'moment';

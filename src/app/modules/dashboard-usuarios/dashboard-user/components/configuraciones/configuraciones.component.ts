@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ConfiguracionService } from '../../services/configuracion.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import FroalaEditor from 'froala-editor';
-import { FactoryModelService } from '../../services/factory-model.service';
+import { FactoryModelService } from '../../../../../services/factory-model.service';
 import { GLOBAL } from '../../../../../services/global';
 import { ToolsService } from '../../services/tools.service';
 import * as _ from 'lodash';

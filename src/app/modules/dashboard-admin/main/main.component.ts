@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { FactoryModelService } from '../../dashboard-usuarios/dashboard-user/services/factory-model.service';
+import { FactoryModelService } from '../../../services/factory-model.service';
 import { config } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 
@@ -10,6 +10,7 @@ declare interface DataTable {
 }
 
 declare const $: any;
+declare const  swal: any;
 
 @Component({
   selector: 'app-main',
@@ -35,7 +36,7 @@ export class MainComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     // {limit: 10, skip: 10 }
-    this._factory.query('user', { limit: 10, skip: 10 }).subscribe(
+    this._factory.query('user', { limit: 10, skip: 10, populate: ['cabeza','rol'] }).subscribe(
       (response: any) => {
         console.log(response);
         this.dataTable.headerRow = ['Name', 'Lastname', 'Username', 'Cabeza', 'Email', 'Celular', 'Acciones'];
@@ -47,20 +48,14 @@ export class MainComponent implements OnInit, AfterViewInit {
       error => {
         console.log('Error', error);
       });
-      this._factory.search({ limit: 10, skip: 10, joins: 'cabeza' }).subscribe(
-        (response: any) => {
-          console.log('search');
-          console.log(response);
-        },
-        error => {
-          console.log('Error', error);
-        });
-    /* const userTemporal = { name: 'Luis', lastname: 'Jaimes', username: 'luisalbertoj', cabeza: 'origin', rol: 'Admin', email: 'luisalbertoj.tober@gmail.com', celular: '3188729934' };
-    this.usuarioSeleccionado = this._usuario.usuarioLogeado;
-    this.dataTable.headerRow = ['Name', 'Lastname', 'Username', 'Cabeza', 'Rol', 'Email', 'Celular', 'Acciones'];
-    this.dataTable.footerRow = ['Name', 'Lastname', 'Username', 'Cabeza', 'Rol', 'Email', 'Celular', 'Acciones'];
-    this.dataTable.dataRows = [Object.values(userTemporal)];
-    this.loader = false; */
+    this._factory.search({ limit: 10, skip: 10, joins: 'cabeza', app: 'publihazclickrootadmin' }).subscribe(
+      (response: any) => {
+        console.log('search');
+        console.log(response);
+      },
+      error => {
+        console.log('Error', error);
+      });
   }
 
   ngAfterViewInit() {
@@ -110,10 +105,23 @@ export class MainComponent implements OnInit, AfterViewInit {
 
     $('.card .material-datatables label').addClass('form-group');
   }
-  seleccion(row) {
-    console.log(row);
-    console.log(this.usuarioSeleccionado);
+  seleccion(row: any) {
     this.usuarioSeleccionado = row;
+    const params = {
+      where: {
+        user: row.id
+      }
+    };
+    this._factory.query('userpaquete/consulpaquete', params)
+    .subscribe(
+      (response: any) => {
+        this.usuarioSeleccionado.paquete = response.data;
+        console.log(this.usuarioSeleccionado);
+      },
+      error => {
+        console.log('Error', error);
+      }
+    );
   }
 
   validarContrasena() {
@@ -145,7 +153,19 @@ export class MainComponent implements OnInit, AfterViewInit {
     }
   }
   buscar(evt: any) {
-    console.log(evt.key);
-    console.log(this.datoBusqueda);
+    this.loader = true;
+    this._factory
+    .query('user', { limit: 10, skip: 10,  populate: ['cabeza','rol'] , or: [ {username: { 'like': '%' +  this.datoBusqueda }}, {username: this.datoBusqueda}] }).subscribe(
+      (response: any) => {
+        console.log(response);
+        this.dataTable.headerRow = ['Name', 'Lastname', 'Username', 'Cabeza', 'Email', 'Celular', 'Acciones'];
+        this.dataTable.footerRow = ['Name', 'Lastname', 'Username', 'Cabeza', 'Email', 'Celular', 'Acciones'];
+        this.dataTable.dataRows = response.data;
+        this.loader = false;
+        this.config();
+      },
+      error => {
+        console.log('Error', error);
+      });
   }
 }

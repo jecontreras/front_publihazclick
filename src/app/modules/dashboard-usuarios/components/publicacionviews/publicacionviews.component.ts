@@ -2,7 +2,7 @@ import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ActividadService } from '../../dashboard-user/services/actividad.service';
 import { PublicacionService } from '../../dashboard-user/services/publicacion.service';
-import { FactoryModelService } from '../../dashboard-user/services/factory-model.service';
+import { FactoryModelService } from '../../../../services/factory-model.service';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToolsService } from '../../dashboard-user/services/tools.service';
 import * as _ from 'lodash';

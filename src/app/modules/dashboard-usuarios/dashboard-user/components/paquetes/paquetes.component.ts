@@ -3,7 +3,7 @@ import { PaquetesService } from '../../services/paquetes.service';
 import { ToolsService } from '../../services/tools.service';
 import * as _ from 'lodash';
 import * as md5 from 'md5';
-import { FactoryModelService } from '../../services/factory-model.service';
+import { FactoryModelService } from '../../../../../services/factory-model.service';
 import { GLOBAL } from '../../../../../services/global';
 declare var ePayco: any;
 @Component({

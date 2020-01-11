@@ -1,5 +1,5 @@
 export const GLOBAL = {
-
+// actividad-admin: 5e1603065728a31e8d3fbb1e
 
   /* ------------------- Variables de desarrollo  ------------- */
    url: 'http://localhost:1337/',
@@ -7,7 +7,6 @@ export const GLOBAL = {
    estadoPruebaPagos: true,
    keyEpayco: '622948e11f5c849086ae425e6d685741',
    estadoApp: 'Dev',
-   version: '1.0'
 
 
 
@@ -16,8 +15,8 @@ export const GLOBAL = {
   urlFront: 'https://publihazclick.herokuapp.com/',
   estadoPruebaPagos: true,
   keyEpayco: '622948e11f5c849086ae425e6d685741',
-  estadoApp: 'Prue',
-  version: '1.0' */
+  estadoApp: 'Prue', */
+  
 
 
 
@@ -27,6 +26,8 @@ export const GLOBAL = {
    url: 'http://api.publihazclick.com/',
    estadoPruebaPagos: false,
    keyEpayco: '622948e11f5c849086ae425e6d685741',
-   estadoApp: 'Prod',
-   version: '1.0' */
+   estadoApp: 'Prod', */
+
+
+   version: '1.4'
 };

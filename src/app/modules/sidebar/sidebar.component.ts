@@ -28,6 +28,12 @@ export const ROUTES: RouteInfo[] = [{
         title: 'Usuarios',
         type: 'link',
         icontype: 'dashboard'
+    },
+    {
+        path: '/dashboard-admin/actividades',
+        title: 'Actividades',
+        type: 'link',
+        icontype: 'apps'
     }
 ];
 @Component({

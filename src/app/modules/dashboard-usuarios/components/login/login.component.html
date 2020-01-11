@@ -1,115 +1,92 @@
-<div class="py-5 text-center text-white h-100 align-items-center d-flex"
+<!-- <div class="py-5 text-center text-white h-100 align-items-center d-flex"
     style="background-image: linear-gradient(to bottom,#6b92ccbf, rgba(0, 0, 0, .75)),
 url(https://s3.amazonaws.com/publihazclick/default/fondo.jpg);
- background-position: center center, center center;  background-size: cover, cover;  background-repeat: repeat, repeat;">
+ background-position: center center, center center;  background-size: cover, cover;  background-repeat: repeat, repeat;"> -->
+<div class="wrapper wrapper-full-page">
+  <div class="page-header login-page header-filter" filter-color="black"
+    style="background-image: url('./assets/img/login.jpg'); background-size: cover; background-position: top center;">
     <div class="container py-5">
-        <div class="row">
-            <div class="mx-auto col-lg-8 col-md-10">
-              <div
-                *ngIf="!reContrasena"
-              >
-              <div>
-                <img src="https://s3.amazonaws.com/publihazclick/default/logo.png"
-                alt="logo" class="logo">
+      <div class="row">
+        <div class="mx-auto col-lg-8 col-md-10">
+          <div *ngIf="!reContrasena">
+            <div>
+              <img src="https://s3.amazonaws.com/publihazclick/default/logo.png" alt="logo" class="logo">
+            </div>
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" style="color: white;">
+              <div class="form-group row">
+                <!-- <label for="username" class="col-sm-2 col-form-label">Nombre de usuario</label> -->
+                <div class="col-sm-2 col-form-label" style="text-align: end">
+                  <i class="fas fa-user-tie fa-2x "></i>
+                </div>
+                <div class="col-sm-10">
+                  <input style="color: white;" type="text" class="form-control" id="username"
+                    matTooltip="Nombre de usuario: aquí ingresa el nombre de usuario que se registro si no lo recuerdas lo puedes buscar en su correo electrónico registrado"
+                    type="text" formControlName="username" placeholder="Nombre de usuario"
+                    [ngClass]="{ 'is-invalid': submitted && f.username.errors }" required>
+                </div>
               </div>
-              <form
-                [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                  <div class="form-group row">
-                      <!-- <label for="username" class="col-sm-2 col-form-label">Nombre de usuario</label> -->
-                      <div class="col-sm-2 col-form-label" style="text-align: end">
-                          <i class="fas fa-user-tie fa-2x "></i>
-                      </div>
-                      <div class="col-sm-10">
-                          <input type="text" class="form-control" id="username"
-                              matTooltip="Nombre de usuario: aquí ingresa el nombre de usuario que se registro si no lo recuerdas lo puedes buscar en su correo electrónico registrado"
-                              type="text" formControlName="username" placeholder="Nombre de usuario"
-                              [ngClass]="{ 'is-invalid': submitted && f.username.errors }" required>
-                      </div>
-                  </div>
-                  <div class="form-group row">
-                      <!-- <label for="inputPassword3" class="col-sm-2 col-form-label">Contraseña</label> -->
-                      <div class="col-sm-2 col-form-label" style="text-align: end">
-                          <i class="fas fa-key fa-2x"></i>
-                      </div>
-                      <div class="col-sm-10">
-                          <input type="password" class="form-control" id="inputPassword3" placeholder="Password"
-                              matTooltip="Contraseña de usuario: aquí ingresa la contraseña de usuario que se registro si no lo recuerdas lo puedes buscar en su correo electrónico registrado"
-                              formControlName="password" placeholder="Contraseña"
-                              [ngClass]="{ 'is-invalid': submitted && f.password.errors }" required>
-                      </div>
-                  </div>
-                  <div class="form-group row">
-                      <div class="col-sm-2 col-form-label" style="text-align: end">
-                          <i class="fas fa-closed-captioning fa-2x"></i>
-                      </div>
-                      <div class="col-sm-10">
-                          <div class="justify-content-md-center row col">
-                              <re-captcha (resolved)="resolved($event)"
-                                  siteKey="6LcmBpkUAAAAACicKNoRi5tt0sdq4I2h_HsHZS0Z"></re-captcha>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="form-group row">
-                    <div class="col">
-
-                    </div>
-                    <div class="">
-                      <button
-                        type="button" class="btn btn-info"
-                        (click)="reContrasena=!reContrasena"
-                      >
-                        Recuperar Contraseña
-                      </button>
-                    </div>
-                  </div>
-                  <div class="form-group" *ngIf="disabled">
-                      <button [disabled]="loading" disabled="!estadoPeticion" class="btn btn-primary">
-                          <i class="fas fa-sign-in-alt fa-1x"></i>
-                          Ingresar
-                      </button>
-                  </div>
-              </form>
+              <div class="form-group row">
+                <!-- <label for="inputPassword3" class="col-sm-2 col-form-label">Contraseña</label> -->
+                <div class="col-sm-2 col-form-label" style="text-align: end">
+                  <i class="fas fa-key fa-2x"></i>
+                </div>
+                <div class="col-sm-10">
+                  <input style="color: white;" type="password" class="form-control" id="inputPassword3" placeholder="Password"
+                    matTooltip="Contraseña de usuario: aquí ingresa la contraseña de usuario que se registro si no lo recuerdas lo puedes buscar en su correo electrónico registrado"
+                    formControlName="password" placeholder="Contraseña"
+                    [ngClass]="{ 'is-invalid': submitted && f.password.errors }" required>
+                </div>
               </div>
-                <div
-                  *ngIf="reContrasena"
-                  class="column"
-                >
-                  <div class="md-form col-md-6">
-                    <label>Email de Tu Usuario Gmail</label>
-                    <input
-                       type="email"
-                       placeholder="Correo Electronico"
-                       [(ngModel)]="data.email"
-                       (blur)="validadEmail()"
-                       required
-                       class="form-control white-text"
-                     >
-                     <div
-                       *ngIf="!disabledemail"
-                     >
-                       <span class="bg-danger text-white rounded">El Email Solo Seran Correos Con Dominio Gmail</span>
-                     </div>
-                  </div>
-                  <div
-                    fxLayout="row"
-                    fxLayoutAlign="center"
-                  >
-                    <button
-                       type="button" class="btn btn-primary"
-                       (click)="reContrasena=!reContrasena"
-                    >
-                      Atras
-                    </button>
-                    <button
-                       type="button" class="btn btn-success"
-                       (click)="submitCorreo()"
-                    >
-                      Enviar
-                    </button>
+              <div class="form-group row">
+                <div class="col-sm-2 col-form-label" style="text-align: end">
+                  <i class="fas fa-closed-captioning fa-2x"></i>
+                </div>
+                <div class="col-sm-10">
+                  <div class="justify-content-md-center row col">
+                    <re-captcha (resolved)="resolved($event)" siteKey="6LcmBpkUAAAAACicKNoRi5tt0sdq4I2h_HsHZS0Z">
+                    </re-captcha>
                   </div>
                 </div>
+              </div>
+              <div class="form-group row">
+                <div class="col">
 
+                </div>
+                <div class="">
+                  <button type="button" class="btn btn-info" (click)="reContrasena=!reContrasena">
+                    Recuperar Contraseña
+                  </button>
+                </div>
+              </div>
+              <div class="form-group" *ngIf="disabled">
+                <button [disabled]="loading" disabled="!estadoPeticion" class="btn btn-primary">
+                  <i class="fas fa-sign-in-alt fa-1x"></i>
+                  Ingresar
+                </button>
+              </div>
+            </form>
+          </div>
+          <div *ngIf="reContrasena" class="column">
+            <div class="md-form col-md-6">
+              <label>Email de Tu Usuario Gmail</label>
+              <input type="email" placeholder="Correo Electronico" [(ngModel)]="data.email" (blur)="validadEmail()"
+                required class="form-control white-text">
+              <div *ngIf="!disabledemail">
+                <span class="bg-danger text-white rounded">El Email Solo Seran Correos Con Dominio Gmail</span>
+              </div>
             </div>
+            <div fxLayout="row" fxLayoutAlign="center">
+              <button type="button" class="btn btn-primary" (click)="reContrasena=!reContrasena">
+                Atras
+              </button>
+              <button type="button" class="btn btn-success" (click)="submitCorreo()">
+                Enviar
+              </button>
+            </div>
+          </div>
+
         </div>
+      </div>
     </div>
+  </div>
 </div>

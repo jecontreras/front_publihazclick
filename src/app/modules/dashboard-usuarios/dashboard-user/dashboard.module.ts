@@ -32,6 +32,7 @@ import { MenuLateralComponent } from './components/menu-lateral/menu-lateral.com
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { ShareModule } from '@ngx-share/core';
 import { ViewPerfilComponent } from './components/view-perfil/view-perfil.component';
+import { CategoriaComponent } from './components/categoria/categoria.component';
 // Componentes
 
 @NgModule({
@@ -54,6 +55,7 @@ import { ViewPerfilComponent } from './components/view-perfil/view-perfil.compon
     InvitarComponent,
     QuejasComponent,
     CalculadoraComponent,
+    CategoriaComponent,
     AlertasComponent,
     MenuLateralComponent,
     ViewPerfilComponent

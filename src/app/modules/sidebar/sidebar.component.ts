@@ -23,11 +23,17 @@ export interface ChildrenItems {
 }
 
 //Menu Items
-export const ROUTES: RouteInfo[] = [{
+export const ROUTES: RouteInfo[] = [
+    {
+        path: '/dashboard-admin/panel',
+        title: 'Panel',
+        type: 'link',
+        icontype: 'dashboard'
+    },{
         path: '/dashboard-admin/usuarios',
         title: 'Usuarios',
         type: 'link',
-        icontype: 'dashboard'
+        icontype: 'person'
     },
     {
         path: '/dashboard-admin/actividades',

@@ -18,6 +18,7 @@ import { QuejasComponent } from './components/quejas/quejas.component';
 import { CompraFinalizadaComponent } from './views/compra-finalizada/compra-finalizada.component';
 import { CalculadoraComponent } from './components/calculadora/calculadora.component';
 import { ViewPerfilComponent } from './components/view-perfil/view-perfil.component';
+import { CategoriaComponent } from './components/categoria/categoria.component';
 
 const dashboardRoutes: Routes = [
  {
@@ -39,6 +40,7 @@ const dashboardRoutes: Routes = [
      {path: 'admin', component: AdminComponent},
      {path: 'lider', component: InvitarComponent},
      {path: 'calculadora', component: CalculadoraComponent},
+     {path: 'categoria', component: CategoriaComponent},
      {path: 'quejas', component: QuejasComponent},
      {path: 'view_perfil/:id', component: ViewPerfilComponent},
      // {path: 'actividades/publicacionviews/:id', component: PublicacionviewsComponent},

@@ -1,0 +1,32 @@
+<div class="container">
+  <h1>Categorias <i class="fab fa-buromobelexperte"></i></h1>
+  <hr>
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead class="thead-dark" style="text-align: center">
+        <tr>
+          <th>Categoria</th>
+          <th>Minimo de Retiro</th>
+          <th>Referidos</th>
+          <th>Precio Por Click de Referidos </th>
+          <th>Cantidad de Dias de Mini anuncios Diarios</th>
+          <th>Cantidad de Mini anuncios Diarios</th>
+          <th>Recompensa por Invitar Personas</th>
+          <th>Requisito para Retirar Dinero tener Usuarios Activos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of listCategoria">
+          <th scope="col">{{ item.title }}</th>
+          <th scope="col">{{ ( item.minretiro || 0 ).toLocaleString('de-DE', { style: 'currency', currency: 'COP' }) }}</th>
+          <th scope="col">{{ item.referidos }}</th>
+          <th scope="col">{{ ( item.coinclickreferido || 0 ).toLocaleString('de-DE', { style: 'currency', currency: 'COP' }) }}</th>
+          <th scope="col">{{ item.cantidadminianunciosdiarios }} Dias</th>
+          <th scope="col">{{ item.cantidadminianuncios }}</th>
+          <th scope="col">{{ ( item.recompActivacionInvitados ).toLocaleString('de-DE', { style: 'currency', currency: 'COP' }) }}</th>
+          <th scope="col">{{ item.requiredcountmini }}</th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

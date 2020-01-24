@@ -12,7 +12,7 @@
       <tbody>
         <tr>
           <th scope="col">Categoria</th>
-          <th scope="col">xxxxxxxxxxxxxxxxxxxxxxxxxxx</th>
+          <th scope="col">{{ data.categoria }}</th>
         </tr>
         <tr>
           <th scope="col"># Referidos</th>
@@ -36,51 +36,51 @@
         </tr>
         <tr>
           <th scope="col">RECOMP. ACTIVACION DE TUS INVITADOS </th>
-          <th scope="col">xxxxxxxxxxxxxxxxxxxxxxxxxxx</th>
+          <th scope="col">${{ ( data.recompActivacionInvitados || 0 ).toLocaleString('de-DE', { style: 'currency', currency: 'COP' }) }}</th>
         </tr>
         <tr>
           <th scope="col">
             <p>GANANCIAS DIARIAS Y MENSUAL POR TUS
               PROPIOS CLICKS</p>
           </th>
-          <th scope="col">xxxxxxxxxxxxxxxxxxxxxxxxxxx</th>
+          <th scope="col">${{ ( data.gananciasDiariasClick || 0 ).toLocaleString('de-DE', { style: 'currency', currency: 'COP' }) }}</th>
         </tr>
         <tr>
           <th scope="col">
             <p>CANTIDAD DE MINIANUNCIOS QUE RECIBIRAS <br>
               DIARIAMENTE COMO OBSEQUIO SEGÚN EL NUMERO DE INVITADOS QUE TENGAS</p>
           </th>
-          <th scope="col">xxxxxxxxxxxxxxxxxxxxxxxxxxx</th>
+          <th scope="col">{{ data.cantidadMiniAnunciosNumeroInvitados }}</th>
         </tr>
         <tr>
           <th scope="col">
             <p>GANANCIA MENSUAL EN MINIANUNCIOS DE <br>
               ACUERDO AL NUMERO MAXIMO DE INVITADOS QUE TENGAS EN CADA CATEGORIA</p>
           </th>
-          <th scope="col">xxxxxxxxxxxxxxxxxxxxxxxxxxx</th>
+          <th scope="col">${{ ( data.gananciasMensualMinianuncios || 0 ).toLocaleString('de-DE', { style: 'currency', currency: 'COP' }) }}</th>
         </tr>
         <tr>
           <th scope="col">VALOR A PAGAR POR LOS CLICKS DE CADA INVITADO</th>
-          <th scope="col">xxxxxxxxxxxxxxxxxxxxxxxxxxx</th>
+          <th scope="col">${{ ( data.valorPagarClickReferidos || 0 ).toLocaleString('de-DE', { style: 'currency', currency: 'COP' }) }}</th>
         </tr>
         <tr>
           <th scope="col">RECOMP DIARIA QUE OBTIENES POR LAS TAREAS DE CADA INVITADO </th>
-          <th scope="col">xxxxxxxxxxxxxxxxxxxxxxxxxxx</th>
+          <th scope="col">${{ ( data.recomPensaDiariaInvitado || 0 ).toLocaleString('de-DE', { style: 'currency', currency: 'COP' }) }}</th>
         </tr>
         <tr>
           <th scope="col">RECOMP. CLICKS/MES</th>
-          <th scope="col">xxxxxxxxxxxxxxxxxxxxxxxxxxx</th>
+          <th scope="col">${{ ( data.recomPensaMes || 0).toLocaleString('de-DE', { style: 'currency', currency: 'COP' }) }}</th>
         </tr>
         <tr>
           <th scope="col">TOTAL DE GANACIA MENSUAL QUE TE GENERA CADA INVITADO </th>
-          <th scope="col">xxxxxxxxxxxxxxxxxxxxxxxxxxx</th>
+          <th scope="col">${{ ( data.totalGananciasMensualesInvitado || 0 ).toLocaleString('de-DE', { style: 'currency', currency: 'COP' }) }}</th>
         </tr>
         <tr class="table-success">
           <th scope="col">
             <p>TOTAL DE GANANCIA MENSUAL QUE TE GENERA
             </p>
           </th>
-          <th scope="col">xxxxxxxxxxxxxxxxxxxxxxxxxxx</th>
+          <th scope="col">${{ ( data.totalMes || 0 ).toLocaleString('de-DE', { style: 'currency', currency: 'COP' }) }}</th>
         </tr>
 
 

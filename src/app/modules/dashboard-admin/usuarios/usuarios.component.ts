@@ -137,7 +137,7 @@ export class UsuariosComponent implements OnInit {
     this.cargarPuntos();
   }
   cargarPaquete(params: any) {
-    this._factory.query('userpuntos/consulpaquete', params)
+    this._factory.query('userpaquete/consulpaquete', params)
       .subscribe(
         (response: any) => {
           this.usuarioSeleccionado.paquete = response.data;

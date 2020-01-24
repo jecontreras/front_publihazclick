@@ -34,7 +34,25 @@ export const ROUTES: RouteInfo[] = [{
         title: 'Actividades',
         type: 'link',
         icontype: 'apps'
-    }
+    },
+    {
+        path: '/dashboard-admin/retiros',
+        title: 'Retiros',
+        type: 'link',
+        icontype: 'apps'
+    },
+    {
+        path: '/dashboard-admin/puntos',
+        title: 'Puntos',
+        type: 'link',
+        icontype: 'apps'
+    },
+    {
+        path: '/dashboard-admin/notificacion',
+        title: 'Notificaciones',
+        type: 'link',
+        icontype: 'apps'
+    },
 ];
 @Component({
     selector: 'app-sidebar-cmp',

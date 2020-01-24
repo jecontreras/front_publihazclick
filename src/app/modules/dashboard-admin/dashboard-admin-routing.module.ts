@@ -3,6 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthService } from 'src/app/services/auth-admin.services';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { ActividadesComponent } from './actividades/actividades.component';
+import { NotificacionComponent } from './notificacion/notificacion.component';
+import { RetirosComponent } from './retiros/retiros.component';
+import { PuntosComponent } from './puntos/puntos.component';
 
 const routes: Routes = [
   /* {
@@ -20,7 +23,10 @@ const routes: Routes = [
     children: [
       {path: '', component: UsuariosComponent},
       {path: 'usuarios', component: UsuariosComponent},
-      {path: 'actividades', component: ActividadesComponent}
+      {path: 'actividades', component: ActividadesComponent},
+      {path: 'retiros', component: RetirosComponent},
+      {path: 'notificacion', component: NotificacionComponent},
+      {path: 'puntos', component: PuntosComponent},
     ]
   }
 ];

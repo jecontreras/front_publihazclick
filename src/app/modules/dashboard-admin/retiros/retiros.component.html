@@ -21,7 +21,7 @@
               </svg>
               Loading..
             </div>
-            <div id="datatables_filter" class="dataTables_filter">
+            <!--<div id="datatables_filter" class="dataTables_filter" *ngIf="!disableretiro">
               <label class="form-group">
                 <input [(ngModel)]="datoBusqueda" type="search" class="form-control form-control-sm"
                   placeholder="Buscar Retiros" aria-controls="datatables"></label>
@@ -29,8 +29,8 @@
                 class="btn btn-primary btn-just-icon btn-round">
                 <i class="material-icons">search</i>
               </button>
-            </div>
-            <div class="material-datatables" *ngIf="!loader">
+            </div>-->
+            <div class="material-datatables" *ngIf="!loader && !disableretiro">
               <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0"
                 width="100%" style="width:100%">
                 <thead>
@@ -45,29 +45,362 @@
                 </tfoot>
                 <tbody>
                   <tr *ngFor="let row of dataTable.dataRows">
-                    <td>{{row['name']}}</td>
-                    <td>{{row['lastname']}}</td>
-                    <td>{{row['username']}}</td>
-                    <td>{{row['cabeza']?.username}}</td>                   
-                    <td>{{row['email']}}</td>
-                    <td>{{row['celular']}}</td>                    
+                    <td>{{row['user']?.username}}</td>
+                    <td>{{row['user']?.email}}</td>
+                    <td>{{row['cantidad']}}</td>
+                    <td>{{row['estado']}}</td>                   
+                    <td>{{row['tipoBanco']?.titulo}}</td>
+                    <td>{{row['createdAt']}}</td>                    
                     <td>
-                      <button type="button" (click)="seleccion(row)" class="btn btn-link btn-warning btn-just-icon edit"
+                      <button type="button" (click)="open(row, 'retiro')" class="btn btn-link btn-warning btn-just-icon edit"
                         data-toggle="modal" data-target=".bd-example-modal-lg"><i
-                          class="material-icons">dvr</i></button>
+                          class="material-icons">remove_red_eye</i></button>
                     </td>
                   </tr>
                 </tbody>
               </table>
-              <nav aria-label="Page navigation example  text-rigth">
-                <ul class="pagination">
-                  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                  <li class="page-item"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                </ul>
+            </div>
+            <div
+              *ngIf="disableretiro"
+              class="column mat-elevation-z8"
+            >
+              <nav class="navbar navbar-dark bg-primary row">
+                <!-- Navbar content -->
+                <h5 class="col text-white">Retiro de Dineros</h5>
+                <div class="">
+                  <button
+                    mat-mini-fab color="warn"
+                    (click)="openretiro()"
+                    aria-label="agregar"
+                    *ngIf="disableretiro"
+                  >
+                    <i class="material-icons">close</i>
+                  </button>
+                </div>
               </nav>
+
+              <div
+                class="column m content container p"
+              >
+                <div class="row">
+                  <mat-form-field
+                      class="example-full-width col"
+                  >
+                      <input
+                          matInput
+                          required
+                          type="text"
+
+                          placeholder="Codigo"
+                          disabled="true"
+                          [(ngModel)]="retiroForm.codigo"
+                      >
+                  </mat-form-field>
+                  <mat-form-field
+                      class="example-full-width col"
+                  >
+                      <input
+                          matInput
+                          required
+                          type="text"
+
+                          placeholder="Titulo"
+                          disabled="true"
+                          [(ngModel)]="retiroForm.titulo"
+                      >
+                  </mat-form-field>
+                </div>
+                <div class="row">
+                  <mat-form-field
+                      class="example-full-width col"
+                  >
+                      <mat-select
+                        (blur)="onBlur('estado')"
+                        [(ngModel)]="retiroForm.estado"
+                      >
+                        <mat-option
+                          value="activo"
+                        >
+                          Activo
+                        </mat-option>
+                        <mat-option
+                          value="inactivo"
+                        >
+                          Inactivo
+                        </mat-option>
+                        <mat-option
+                          value="pendiente"
+                        >
+                          Pendiente
+                        </mat-option>
+                        <mat-option
+                          value="completado"
+                        >
+                          Completado
+                        </mat-option>
+                        <mat-option
+                          value="rechazado"
+                        >
+                          Rechazado
+                        </mat-option>
+                      </mat-select>
+                  </mat-form-field>
+                  <mat-form-field
+                      class="example-full-width col"
+                  >
+                      <span matPrefix><i class="fas fa-coins icons"></i></span>
+                      <input
+                          matInput
+                          required
+                          type="number"
+                          placeholder="Cantidad"
+                          (blur)="onBlur('cantidad')"
+                          max="{{retiroForm.coins}}"
+                          disabled
+                          min="1"
+                          [(ngModel)]="retiroForm.cantidad"
+                      >
+                  </mat-form-field>
+                </div>
+                <div
+                  class="row"
+                  *ngIf="retiroForm.id"
+                >
+                  <mat-form-field
+                      class="example-full-width col"
+                  >
+                      <input
+                          matInput
+                          required
+                          type="string"
+                          placeholder="Fecha de Creado"
+                          disabled="true"
+                          [(ngModel)]="retiroForm.createdAt"
+                      >
+                  </mat-form-field>
+                  <mat-form-field
+                      class="example-full-width col"
+                  >
+                      <input
+                          matInput
+                          required
+                          type="string"
+                          placeholder="Fecha de Actualizado"
+                          disabled="true"
+                          [(ngModel)]="retiroForm.updatedAt"
+                      >
+                  </mat-form-field>
+                </div>
+                <div class="row">
+                  <mat-form-field
+                      class="example-full-width col"
+                  >
+                    <textarea
+                      [disabled]="retiroForm.id"
+                      matInput
+                      placeholder="Descripcion"
+                      [(ngModel)]="retiroForm.descripcion"
+                    ></textarea>
+                  </mat-form-field>
+                </div>
+                <div class="column" *ngIf="retiroForm.id">
+                    <nav class="navbar navbar-dark bg-primary row col">
+                      <!-- Navbar content -->
+                      <h5 class="col text-white">Datos Bancarios</h5>
+                    </nav>
+                    <div class="row">
+                        <mat-form-field
+                            class="example-full-width col-sm-12"
+                        >
+                          <input
+                              matInput
+                              required
+                              type="text"
+                              placeholder="Banco"
+                              disabled="true"
+                              [(ngModel)]="retiroForm.tipoBanco.titulo"
+                          >
+                        </mat-form-field>
+                        <mat-form-field
+                            class="example-full-width col-sm-6"
+                        >
+                          <input
+                              matInput
+                              required
+                              type="text"
+                              placeholder="Numero de Banco"
+                              disabled="true"
+                              [(ngModel)]="retiroForm.tipoBanco.nCuenta"
+                          >
+                        </mat-form-field>
+                        <mat-form-field
+                            class="example-full-width col-sm-6"
+                        >
+                          <input
+                              matInput
+                              required
+                              type="text"
+                              placeholder="Tipo de cuenta"
+                              disabled="true"
+                              [(ngModel)]="retiroForm.tipoBanco.tipoCuenta"
+                          >
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="column">
+                  <nav class="navbar navbar-dark bg-primary row col">
+                    <!-- Navbar content -->
+                    <h5 class="col text-white">Usuario</h5>
+                  </nav>
+                  <div class="column">
+                    <div class="row">
+                      <div class="col">
+                        <label class="text">UserName: </label>
+                        <span> {{ retiroForm.user.username }} </span>
+                      </div>
+                      <div class="col">
+                        <label class="text">Nombre: </label>
+                        <span> {{ retiroForm.user.name }} </span>
+                      </div>
+                      <div class="col">
+                        <label class="text">Apellido: </label>
+                        <span> {{ retiroForm.user.apellido }} </span>
+                      </div>
+                      <div class="col">
+                        <label class="text">Documento: </label>
+                        <span> {{ retiroForm.user.documento }} </span>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <label class="text">Email: </label>
+                        <span> {{ retiroForm.user.email }} </span>
+                      </div>
+                      <div class="col">
+                        <label class="text">Telefono: </label>
+                        <span> {{ retiroForm.user.celular }} </span>
+                      </div>
+                      <div class="col">
+                        <label class="text">Estado: </label>
+                        <span> {{ retiroForm.user.estado }} </span>
+                      </div>
+                      <div class="col">
+                        <label class="text">Sexo: </label>
+                        <span> {{ retiroForm.user.sexo }} </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="column">
+                  <nav class="navbar navbar-dark bg-primary row col">
+                    <!-- Navbar content -->
+                    <h5
+                      class="col text-white"
+                      aria-label="puntos"
+                    >
+                        <span *ngIf="!disablepunto">Puntos Realizados</span>
+                        <span *ngIf="disablepunto">Actividades Realizados</span>
+                    </h5>
+                    <div
+                      class="row"
+                      *ngIf="disablepunto"
+                    >
+                      <button
+                        mat-mini-fab color="warn"
+                        (click)="disablepunto = false"
+                        aria-label="agregar"
+                      >
+                        <i
+                          class="far fa-window-close"></i>
+                      </button>
+                    </div>
+                  </nav>
+                  <div
+                    class="column m content container p"
+                  >
+                    <table
+                        *ngIf="!disablepunto"
+                        mat-table [dataSource]="puntoSource" class="mat-elevation-z8 col"
+                    >
+                      <ng-container matColumnDef="posicion">
+                        <th mat-header-cell *matHeaderCellDef> Opciones </th>
+                        <td mat-cell *matCellDef="let element">
+                          <button
+                            mat-mini-fab color="primary"
+                            (click)="open(element, data, 'puntos')"
+                          >
+                            <i class="far fa-eye"></i>
+                          </button>
+                        </td>
+                      </ng-container>
+                      <ng-container matColumnDef="codigo">
+                        <th mat-header-cell *matHeaderCellDef> Codigo </th>
+                        <td mat-cell *matCellDef="let element"> {{ element.codigo || 'null' }} </td>
+                      </ng-container>
+                      <ng-container matColumnDef="valor">
+                        <th mat-header-cell *matHeaderCellDef> Valor </th>
+                        <td mat-cell *matCellDef="let element">
+                            <!-- {{ '$'+element.puntos.valor }}  -->
+                            {{ element.valor | currency }}
+                        </td>
+                      </ng-container>
+                      <ng-container matColumnDef="actividad">
+                        <th mat-header-cell *matHeaderCellDef> Actividad </th>
+                        <td
+                          mat-cell
+                          *matCellDef="let element"
+                        >
+                          {{ element.actividad.prioridad }}
+                        </td>
+                      </ng-container>
+                      <ng-container matColumnDef="state">
+                        <th mat-header-cell *matHeaderCellDef> Estado </th>
+                        <td mat-cell *matCellDef="let element"> {{ element.state }} </td>
+                      </ng-container>
+                      <ng-container matColumnDef="createdAt">
+                        <th mat-header-cell *matHeaderCellDef> Creado </th>
+                        <td mat-cell *matCellDef="let element"> {{ element.createdAt  }} </td>
+                      </ng-container>
+                      <tr mat-header-row *matHeaderRowDef="displayedPuntos"></tr>
+                      <tr mat-row *matRowDef="let row; columns: displayedPuntos;"></tr>
+                    </table>
+                    <mat-paginator
+                      *ngIf="!check"
+                      [length]="length2"
+                      [pageSize]="pageSize2"
+                      (page)="setPageSizeOptions($event)"
+                    >
+                    </mat-paginator>
+                    <div
+                      class="column"
+                      *ngIf="disablepunto"
+                    >
+                      <div class="row">
+                        <div class="col">
+                          <label class="text">Codigo: </label>
+                          <span> {{ puntoForm.actividad.codigo || 'null' }} </span>
+                        </div>
+                        <div class="col">
+                          <label class="text">Realizado: </label>
+                          <span> {{ puntoForm.actividad.create }} </span>
+                        </div>
+                        <div class="col">
+                          <label class="text">Estado: </label>
+                          <span> {{ puntoForm.actividad.estado }} </span>
+                        </div>
+                        <div class="col">
+                          <label class="text">Prioridad: </label>
+                          <span> {{ puntoForm.actividad.prioridad }} </span>
+                        </div>
+                        <div class="col">
+                          <label class="text">Valor: </label>
+                          <span> {{ '$'+puntoForm.actividad.valor }} </span>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+              </div>
+              </div>
             </div>
           </div>
           <!-- end content-->

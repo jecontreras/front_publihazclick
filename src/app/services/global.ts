@@ -29,5 +29,5 @@ export const GLOBAL = {
    estadoApp: 'Prod', */
 
 
-   version: '1.4'
+   version: '1.8'
 };

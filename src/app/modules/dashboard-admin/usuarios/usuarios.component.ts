@@ -25,9 +25,8 @@ export class UsuariosComponent implements OnInit {
   public datoBusqueda = '';
   public cabezaNueva = '';
   public paquete = '';
-  public pagina = 10;
-  public paginas = 0;
 
+  public totalUsuarios = 0;
   public loader = true;
   public loaderBotones = false;
   public loadPuntos = false;
@@ -46,27 +45,23 @@ export class UsuariosComponent implements OnInit {
     this.cargarTodos();
   }
   cargarTodos() {
-    this._factory.post('user/search', { limit: 10, skip: 10, populate: ['cabeza', 'rol'] }).subscribe(
+    this._factory.post('user/search', { limit: 50, skip: 50, populate: ['cabeza', 'rol'] }).subscribe(
       (response: any) => {
         console.log(response);
         this.dataTable = {
-          headerRow: ['Name', 'Lastname', 'Username', 'Cabeza', 'Email', 'Celular', 'Acciones'],
-          footerRow: ['Name', 'Lastname', 'Username', 'Cabeza', 'Email', 'Celular', 'Acciones'],
+          headerRow: ['Name', 'Lastname', 'Username', 'Cabeza', 'Email', 'Acciones'],
+          footerRow: ['Name', 'Lastname', 'Username', 'Cabeza', 'Email', 'Acciones'],
           dataRows: []
         };
-        this.dataTable.headerRow = ['Name', 'Lastname', 'Username', 'Cabeza', 'Email', 'Celular', 'Acciones'];
-        this.dataTable.footerRow = ['Name', 'Lastname', 'Username', 'Cabeza', 'Email', 'Celular', 'Acciones'];
+        this.dataTable.headerRow = ['Name', 'Lastname', 'Username', 'Cabeza', 'Email', 'Acciones'];
+        this.dataTable.footerRow = ['Name', 'Lastname', 'Username', 'Cabeza', 'Email', 'Acciones'];
         this.dataTable.dataRows = response.data;
-        this.paginas = Math.ceil(response.count/10);
-        console.log(this.paginas);
-        /* new Array(response.count);
-        let contador = 1; 
-        for(let i=this.pagina-10; i<10; i++) {
-          this.dataTable.dataRows[i] = response.data[contador];
-          contador++;
-        } */
+        this.totalUsuarios = response.count;
         this.loader = false;
-        this.config();
+        setTimeout(() => {
+          this.config();
+          console.log("se cumplio el intervalo");
+        }, 500);
       },
       error => {
         console.log('Error', error);
@@ -89,7 +84,7 @@ export class UsuariosComponent implements OnInit {
 
     const table = $('#datatables').DataTable();
 
-    // Edit record
+    /* // Edit record
     table.on('click', '.edit', function (e) {
       let $tr = $(this).closest('tr');
       if ($($tr).hasClass('child')) {
@@ -99,14 +94,14 @@ export class UsuariosComponent implements OnInit {
       var data = table.row($tr).data();
       alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
       e.preventDefault();
-    });
+    }); */
 
-    // Delete a record
+    /* // Delete a record
     table.on('click', '.remove', function (e) {
       const $tr = $(this).closest('tr');
       table.row($tr).remove().draw();
       e.preventDefault();
-    });
+    }); */
 
     //Like record
     table.on('click', '.like', function (e) {
@@ -123,6 +118,7 @@ export class UsuariosComponent implements OnInit {
         user: row.id
       }
     };
+    this.cargarUsuario(this.usuarioSeleccionado);
     this._factory.query('userpaquete/consulpaquete', params)
       .subscribe(
         (response: any) => {
@@ -249,6 +245,8 @@ export class UsuariosComponent implements OnInit {
             x_ref_payco: this.codigo()
           }
           ;
+          console.log('PEticion para activar paquete');
+          console.log(parametros);
         return this._factory.create('paquete/comprado', parametros)
           .subscribe(
             (res: any) => {
@@ -256,6 +254,7 @@ export class UsuariosComponent implements OnInit {
               swal('Ok', `
       El paquete se activo exitosamente
       ` , 'success');
+              this.seleccion(this.usuarioSeleccionado);
               this.loaderBotones = false;
             },
             (error: any) => {
@@ -289,11 +288,10 @@ export class UsuariosComponent implements OnInit {
         }).subscribe(
           (response: any) => {
             console.log(response);
-            this.dataTable.headerRow = ['Name', 'Lastname', 'Username', 'Cabeza', 'Email', 'Celular', 'Acciones'];
-            this.dataTable.footerRow = ['Name', 'Lastname', 'Username', 'Cabeza', 'Email', 'Celular', 'Acciones'];
+            this.dataTable.headerRow = ['Name', 'Lastname', 'Username', 'Cabeza', 'Email', 'Acciones'];
+            this.dataTable.footerRow = ['Name', 'Lastname', 'Username', 'Cabeza', 'Email', 'Acciones'];
             this.dataTable.dataRows = response.data;
             this.loader = false;
-            this.config();
           },
           error => {
             console.log('Error', error);
@@ -435,6 +433,7 @@ export class UsuariosComponent implements OnInit {
         (response: any) => {
           console.log(response);
           this.usuarioSeleccionado.cabeza = response.data[0].cabeza;
+          this.usuarioSeleccionado.estado = response.data[0].estado;
         },
         error => {
           console.log('Error', error);
@@ -444,4 +443,52 @@ export class UsuariosComponent implements OnInit {
           this.loaderBotones = false;
         });
   }
+  confirmacionManual() {
+    let query = {
+      user: this.usuarioSeleccionado.id,
+      admin: 'luisalbertoj'
+    };
+    this._factory.post('user/activacionManual', query)
+      .subscribe(
+        (response: any) => {
+          console.log(response);
+          swal('Ok', `
+            El usuario se activo
+            ` , 'success');
+          this.loaderBotones = false;
+          this.cargarUsuario(this.usuarioSeleccionado);
+        },
+        error => {
+          console.log('Error', error);
+          swal('Oops', `
+            error al activar el usuario
+            ` , 'error');
+          this.loaderBotones = false;
+        });
+  }
+  desactivarPaquete() {
+    this.loaderBotones = true;
+    const query: any = {
+      user: this.usuarioSeleccionado.id,
+      admin: 'luisalbertoj'
+    };
+    this._factory.post('userpaquete/eliminarpaquete', query)
+      .subscribe(
+        (response: any) => {
+          console.log(response);
+          swal('Ok', `
+                El Paquete se desactivo con exito
+                ` , 'success');
+          this.loaderBotones = false;
+          this.seleccion(this.usuarioSeleccionado);
+        },
+        error => {
+          console.log('Error', error);
+          swal('Oops', `
+                error al desactivar el paquete
+                ` , 'error');
+          this.loaderBotones = false;
+        });
+  }
+
 }

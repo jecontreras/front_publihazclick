@@ -6,6 +6,7 @@ import { ActividadesComponent } from './actividades/actividades.component';
 import { NotificacionComponent } from './notificacion/notificacion.component';
 import { RetirosComponent } from './retiros/retiros.component';
 import { PuntosComponent } from './puntos/puntos.component';
+import { PanelComponent } from './panel/panel.component';
 
 const routes: Routes = [
   /* {
@@ -21,7 +22,8 @@ const routes: Routes = [
    {
     path: '',
     children: [
-      {path: '', component: UsuariosComponent},
+      {path: '', component: PanelComponent},
+      {path: 'panel', component: PanelComponent},
       {path: 'usuarios', component: UsuariosComponent},
       {path: 'actividades', component: ActividadesComponent},
       {path: 'retiros', component: RetirosComponent},

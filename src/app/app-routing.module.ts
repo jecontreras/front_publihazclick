@@ -8,6 +8,7 @@ import { InfoComponent } from './modules/dashboard-usuarios/components/info/info
 import { AuthLayoutComponent } from './modules/layouts/auth/auth-layout.component';
 import { AdminLayoutComponent } from './modules/layouts/admin/admin-layout.component';
 import { AuthService } from './services/auth-admin.services';
+import { PortadaComponent } from './modules/layouts/portada/portada.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'registro', component: RegistryComponent },
   { path: 'registro/:username', component: RegistryComponent },
+  { path: 'portada/:username', component: PortadaComponent},
   { path: 'verificacion/:id', component: VerificacionComponent },
   { path: 'publicacionviews/:id', component: PublicacionviewsComponent },
   { path: 'publicacionviews/:id/:ids', component: PublicacionviewsComponent },

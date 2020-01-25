@@ -104,10 +104,7 @@ export class ActividadService implements OnInit, DoCheck {
 
   cargarActividades() {
     // console.log(this._model.user.nivel);
-    const
-      user: any = JSON.parse(localStorage.getItem('user')),
-      _model: any = this._model
-      ;
+    const user: any = JSON.parse(localStorage.getItem('user'));
     if (this._model.user.nivel) {
       user.nivel = this._model.user.nivel.nivel.nivel;
       this.getgenerate(user);
@@ -137,6 +134,7 @@ export class ActividadService implements OnInit, DoCheck {
           (error: any) => {
             console.log('Error', error);
             swal('Ops!', 'Estimado Usuario Verificar si tienes paquete activo si estas activo por favor comunicar el error', 'error');
+            this.consulActividades();
           }
         );
     }

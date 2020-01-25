@@ -11,7 +11,7 @@ import { LoginComponent } from './modules/dashboard-usuarios/components/login/lo
 import { AuthService } from './services/auth.service';
 import { RegistryComponent } from './modules/dashboard-usuarios/components/registry/registry.component';
 import { MomentModule } from 'ngx-moment';
-import { PublicacionviewsComponent } from './modules/dashboard-usuarios/components/publicacionviews/publicacionviews.component';
+
 
 import { RecaptchaModule } from 'ng-recaptcha';
 import { VerificacionComponent } from './modules/dashboard-usuarios/components/verificacion/verificacion.component';
@@ -29,6 +29,8 @@ import { PageStatusComponent } from './modules/layouts/page-status/page-status.c
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { environment } from 'src/environments/environment';
 import { GLOBAL } from './services/global';
+import { PortadaComponent } from './modules/layouts/portada/portada.component';
+import { PublicacionviewsComponent } from './modules/dashboard-usuarios/components/publicacionviews/publicacionviews.component';
 const config: SocketIoConfig = {
   url: GLOBAL.url,
   options: {}
@@ -38,12 +40,13 @@ const config: SocketIoConfig = {
     AppComponent,
     LoginComponent,
     RegistryComponent,
-    PublicacionviewsComponent,
     VerificacionComponent,
     InfoComponent,
+    PublicacionviewsComponent,
     AuthLayoutComponent,
     AdminLayoutComponent,
-    PageStatusComponent
+    PageStatusComponent,
+    PortadaComponent
   ],
   imports: [
     CommonModule,

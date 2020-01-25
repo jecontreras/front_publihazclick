@@ -17,4 +17,7 @@ export class NotasService {
   pushNota(query: any){
     return this._model.create('notas', query);
   }
+  deleteNota(query: any){
+    return this._model.delete('notas', query.id, query);
+  }
 }

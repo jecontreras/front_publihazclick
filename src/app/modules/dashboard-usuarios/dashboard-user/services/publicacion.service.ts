@@ -124,6 +124,7 @@ export class PublicacionService {
           // _publicacion.publicaciones = response.data;
           _.forEach(response.data, function(rta){
             // console.log(rta);
+            rta.oculto = 150
             if(rta.user){
               if(!rta.user.foto){
                 rta.user.foto = "https://www.selikoff.net/blog-files/null-value.gif";

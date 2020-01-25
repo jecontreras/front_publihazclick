@@ -63,10 +63,14 @@
                         mat-card-image>
                     </a>
                     <mat-card-actions>
-                      <div class="column container" style="height: 120px; overflow: scroll; overflow-x: hidden">
+                      <div class="column container">
                         <label>Descripcion:</label>
-                        <div class="col" [innerHtml]="item.publicacion.descripcion">
+                        <div class="col" [innerHtml]="item.publicacion.descripcion | slice: 0: item.oculto || 150">
                         </div>
+                        <label class="text-primary">
+                          <span (click)="item.oculto = 5000" *ngIf="item.oculto !== 5000">Leer más!</span>
+                          <span (click)="item.oculto = 150" *ngIf="item.oculto == 5000">Ver Menos!</span>
+                        </label>
                       </div>
                     </mat-card-actions>
                   </mat-card>

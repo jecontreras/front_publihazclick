@@ -6,47 +6,6 @@
     class="column"
     *ngIf="!disable"
   >
-    <!-- <div
-      class="p container"
-      style="padding: 10%;"
-      fxLayout="column"
-      fxLayoutAlign="center center"
-    >
-      <mat-card
-        id="carta-paquete"
-        class="m p ancho border border-light"
-        *ngFor="let item of paquetes; index as i"
-      >
-        <mat-card-header
-          class="rounded"
-          fxLayout="column"
-          fxLayoutAlign="center center"
-        >
-          <mat-card-title>{{item.title}}</mat-card-title>
-          <mat-card-subtitle>{{item.subtitle}}</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content
-          fxLayout="column"
-          fxLayoutAlign="center center"
-        >
-
-            <p
-            >
-              {{item.description}}
-            </p>
-
-        </mat-card-content>
-        <mat-card-actions
-          fxLayout="column"
-          fxLayoutAlign="center center"
-        >
-          <a href="{{ item.url }}" target="_blank">
-            <img src="https://369969691f476073508a-60bf0867add971908d4f26a64519c2aa.ssl.cf5.rackcdn.com/btns/btn1.png" alt="none">
-          </a>
-            {{item.valor | currency: 0 : "$"}}
-        </mat-card-actions>
-      </mat-card>
-    </div> -->
     <div class="column content">
       <nav
         class="p-3 mb-2 bg-info text-white rounded"
@@ -55,9 +14,9 @@
       </nav>
       <div class="row p-3 d-flex justify-content-center ">
         <div
-          class="col-9 col-sm-4 col-lg-3 separar" *ngFor="let pro of paquetes; index as i"
+          class="col-9 col-sm-4 col-lg-3 separar"
         >
-          <div class="form-column">
+          <div class="column" *ngFor="let pro of paquetes; index as i">
             <div class="column">
               <div class="mat-elevation-z3 column ancho" style="width: 150%;">
                 <div class="d-flex justify-content-center">
@@ -103,7 +62,7 @@
               </div>
               <br>
               <br>
-              <div class="mat-elevation-z3 column ancho" style="width: 150%;">
+              <div class="mat-elevation-z3 column ancho" style="width: 150%;" *ngIf="index == 1">
                 <div class="d-flex justify-content-center p-3 mb-2 bg-dark text-white rounded">
                   <div class="d-flex justify-content-center p-1">
                     <br>
@@ -133,29 +92,6 @@
             </div>
           </div>
         </div>
-        <br>
-        <!-- <div
-          class="p-3 col-9 col-sm-4 col-lg-3 separar mat-elevation-z3" *ngFor="let pro of paquetes; index as i"
-        >
-          <div class="form-column">
-            <a>
-              <img src="{{ pro.otrourl }}" alt="none" height="250px">
-            </a>
-          </div>
-        </div> -->
-        <br>
-        <!-- <div
-          class="p-3 col-9 col-sm-4 col-lg-3 separar mat-elevation-z3" *ngFor="let pro of paquetes; index as i"
-        >
-          <div class="form-column">
-            <div class="d-flex justify-content-center">
-              <a>
-                <img src="{{ pro.imgwester }}" alt="none"height="250px">
-              </a>
-            </div>
-          </div>
-        </div> -->
-
       </div>
     </div>
   </div>

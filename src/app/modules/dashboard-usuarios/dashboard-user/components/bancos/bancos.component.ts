@@ -33,6 +33,8 @@ export class BancosComponent implements OnInit {
   public cantidaddisabled: boolean = true;
   public disableFecha: boolean = false;
   public user: any = {};
+  public ocultaBtn:boolean = false;
+
   constructor(
     private _bancos: BancosService,
     private formBuilder: FormBuilder,
@@ -47,13 +49,28 @@ export class BancosComponent implements OnInit {
     this.getdisabled();
     this.getretiros(null);
     this.user = this._model.user;
+    this.retornar();
     // console.log(this.user.id);
+  }
+  retornar(){
+    this._model.query('puntos',{
+      where:{ retiros: "5e34b99e3cc34632e418d0ad"}
+    }).subscribe((rta:any)=>{
+      //console.log(rta);
+      _.forEach(rta.data,(row)=>{
+        return this._model.update('puntos',row.id,{
+          id: row.id,
+          state: 'valido',
+          retiros: null
+        }).subscribe((rta)=>console.log(rta));
+      });
+    });
   }
   getdisabled(){
     // console.log(this._model.user.nivel.nivel);
     if(this._model.user){
       if(this._model.user.nivel){
-        // console.log("hey", this._model.user, this._model.user.nivel.nivel.nivel);
+         //console.log("hey", this._model.user, this._model.user.nivel.nivel.nivel);
         if(this._model.user.nivel.nivel){
           this.puntosdisable();
         }else{
@@ -95,7 +112,7 @@ export class BancosComponent implements OnInit {
       this._model.query("user/referidos",query)
       .subscribe(
         (res: any)=>{
-          console.log(res);
+          //console.log(res);
           res = res.data[0];
           if(res){
             this.disable = true;
@@ -139,6 +156,7 @@ export class BancosComponent implements OnInit {
       })
       .subscribe(
         (res: any)=>{
+          //console.log("*", res);
           res = res.data[0];
           if(res){
             if(res.disableretiro){
@@ -353,7 +371,7 @@ export class BancosComponent implements OnInit {
           this.retiroForm.cantidad=coins;
           this.retiroForm.coins=coins;
 
-          if(refer >=30){
+          if(refer >=25){
             this.cantidaddisabled = false;
           }else{
             if(usernivel.puntosValor >= usernivel.nivel.nivel.nivel.minretiro){
@@ -491,7 +509,6 @@ export class BancosComponent implements OnInit {
 
   }
   onSubmitRetiro(){
-    // console.log(this.retiroForm);
     const
       data: any = this.retiroForm,
       usernivel: any = this._model.user
@@ -501,12 +518,16 @@ export class BancosComponent implements OnInit {
       refer: any = this._model.user.nivel
     ;
     // console.log(refer);
-    if(refer){
-      refer = refer.nivel.nivel.referidos;
-    }
-    // console.log(data.codigo, data.user, this.disable, data.cantidad)
-    if(refer >=30){
-      this.cantidaddisabled = false;
+    this.ocultaBtn = true;
+    if(!refer)return false;
+
+    refer = refer.nivel.nivel.referidos;
+    if(usernivel.puntosValor >= usernivel.nivel.nivel.nivel.minretiro) data.cantidad = usernivel.nivel.nivel.nivel.minretiro;
+    //console.log(refer, data);
+    if(refer <= 20){
+      if( data.cantidad >= data.coins ) {swal("Error no Tiene Cantidad Minima de retiro!", {icon: "Fallo",}); return false;}
+      let suma = (Number(data.cantidad)+20000);
+      if( suma > data.coins ){this.procesandoRetiro(data, usernivel); return false;}
       swal({
         title: "Deseas Comprar Tu Paquete?",
         text: "Al desear Comprar tu paquete te vamos a descontar de tus ganancias automaticamente!",
@@ -516,32 +537,27 @@ export class BancosComponent implements OnInit {
       })
       .then((willDelete) => {
         if (willDelete) {
-          // this.retiroForm.cantidad = this.retiroForm.coins-250000;
-          data.pagopaquete = 250000;
+          data.pagopaquete = 20000;
           swal("En Espera! As Seleccionado comprar paquete!", {
             icon: "success",
           });
         }
+        this.procesandoRetiro(data, usernivel);
       });
-    }else{
-      // console.log("hey1",usernivel.nivel);
-      if(usernivel.puntosValor >= usernivel.nivel.nivel.nivel.minretiro){
-        // console.log("hey",this.retiroForml);
-        data.cantidad = usernivel.nivel.nivel.nivel.minretiro;
-      }
-      // coins = coins-30000;
-      // this.retiroForm.pagopaquete = 30000;
-    }
+    }else {this.cantidaddisabled = false; this.procesandoRetiro(data, usernivel);}
     // console.log(usernivel, data);
+  }
+  procesandoRetiro(data:any, usernivel:any){
     if(data.codigo && data.user && this.disable && data.cantidad >= usernivel.nivel.nivel.nivel.minretiro && this.disableFecha){
       if(data.tipoBanco){
         data.tipo = 'estado';
         data.slug = _.kebabCase(data.titulo);
+        //console.log("data", data);
         this._bancos.pushRetiro(data)
-        .subscribe(
-          (res: any)=>{
+        .subscribe((res: any)=>{
             res = res.data;
-            console.log(res);
+            //console.log(res);
+            this.ocultaBtn = true;
             if(res){
               this.retiroForm = {};
               res.tipoBanco = {
@@ -557,16 +573,16 @@ export class BancosComponent implements OnInit {
                 icon: "success",
               });
             }
-          }
-        )
-        ;
+        },(error)=>{
+          this.ocultaBtn=false;
+          this._tools.openSnack('Error no Servidor Comunicate con Tu lider', 'Fallo', false);    
+        });
       }else{
       this._tools.openSnack('Error no hay Un Banco Seleccionado', 'Fallo', false);
       }
     }else{
       this._tools.openSnack('Error no hay Suficiente Saldo Para Retirar', 'Completado', false);
     }
-
   }
   updatepqEstado(){
     if(this._model.user.paquete){

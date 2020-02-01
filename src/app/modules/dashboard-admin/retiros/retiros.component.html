@@ -76,6 +76,14 @@
                   >
                     <i class="material-icons">close</i>
                   </button>
+                  <button
+                    (blur)="onBlur('estado')"
+                    mat-raised-button color="primary"
+                    aria-label="actualizar estado"
+                    *ngIf="disableretiro"
+                  >
+                    Actualizar
+                  </button>
                 </div>
               </nav>
 
@@ -115,7 +123,6 @@
                       class="example-full-width col"
                   >
                       <mat-select
-                        (blur)="onBlur('estado')"
                         [(ngModel)]="retiroForm.estado"
                       >
                         <mat-option

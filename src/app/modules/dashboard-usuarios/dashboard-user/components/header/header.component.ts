@@ -52,7 +52,7 @@ export class HeaderComponent implements OnDestroy, OnInit {
     this.createruta();
   }
   createruta(){
-    this.agente = `${GLOBAL.url}portada/?${this.user.id}`;
+    this.agente = `${GLOBAL.urlFront}portada/${this.user.username}`;
   }
   initbanner(){
     let
@@ -148,7 +148,7 @@ export class HeaderComponent implements OnDestroy, OnInit {
   }
   portapapeles() {
     const
-      val = this.url + 'info/' + this._model.user.username
+      val = this.agente
       ;
     const selBox = document.createElement('textarea');
     selBox.style.position = 'fixed';

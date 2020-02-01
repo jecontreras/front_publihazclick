@@ -10,7 +10,7 @@
     <mat-tab class="textInf" label="Retirar Dinero" fxFill>
 
       <div
-        class="content column"
+        class="container column"
         fxFill
       >
         <div class="row m">
@@ -32,14 +32,6 @@
 
           </div>
           <div class="row m">
-            <!-- <button
-              *ngIf="!disableretiro "
-               mat-mini-fab color="primary"
-              (click)="search(txtretiro, 'retiro')"
-            >
-              <i
-                class="far fa-search"></i>
-            </button> -->
             <button
               *ngIf="!disableretiro "
                mat-raised-button
@@ -65,8 +57,7 @@
               aria-label="agregar"
               *ngIf="disableretiro"
             >
-              <i
-                class="far fa-window-close"></i>
+              <i class="far fa-times-circle"></i>
             </button>
           </div>
         </div>
@@ -82,12 +73,6 @@
               >
                 <i class="far fa-eye"></i>
               </button>
-              <!-- <button
-                 mat-mini-fab color="warn"
-                (click)="delete(element, 'retiro')"
-              >
-                <i class="far fa-trash-alt"></i>
-              </button> -->
              </td>
           </ng-container>
           <ng-container matColumnDef="codigo">
@@ -278,6 +263,7 @@
             >
               <button
                  mat-mini-fab color="primary"
+                *ngIf="!ocultaBtn"
                  (click)="onSubmitRetiro()"
               >
                 <!-- Buscar -->
@@ -292,7 +278,7 @@
       label="Bancos Registrados"
       class="textInf"
     >
-      <div class="content column" fxFill>
+      <div class="content container column" fxFill>
           <div class="row m">
             <mat-form-field
                 class="example-full-width col"
@@ -339,7 +325,7 @@
                  mat-mini-fab color="warn"
                 (click)="open(null, null, 'bancos')"
               >
-                <i class="far fa-window-close"></i>
+                <i class="far fa-times-circle"></i>
               </button>
             </div>
           </div>

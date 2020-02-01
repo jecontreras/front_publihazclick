@@ -73,4 +73,7 @@ export class BancosService {
   createnota(query: any){
     return this._model.create('notas', query);
   }
+  createnotapaquete(query: any){
+    return this._model.create('notas/paquete', query);
+  }
 }

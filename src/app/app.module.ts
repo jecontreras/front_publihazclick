@@ -31,6 +31,7 @@ import { environment } from 'src/environments/environment';
 import { GLOBAL } from './services/global';
 import { PortadaComponent } from './modules/layouts/portada/portada.component';
 import { PublicacionviewsComponent } from './modules/dashboard-usuarios/components/publicacionviews/publicacionviews.component';
+import { MenuLateralComponent } from './modules/layouts/menu-lateral/menu-lateral.component';
 const config: SocketIoConfig = {
   url: GLOBAL.url,
   options: {}
@@ -46,7 +47,8 @@ const config: SocketIoConfig = {
     AuthLayoutComponent,
     AdminLayoutComponent,
     PageStatusComponent,
-    PortadaComponent
+    PortadaComponent,
+    MenuLateralComponent
   ],
   imports: [
     CommonModule,

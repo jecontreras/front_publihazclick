@@ -99,17 +99,22 @@
       <nav class="navbar navbar-dark bg-primary row">
         <!-- Navbar content -->
         <h5 class="col text-white">Retiro de Dineros</h5>
-        <div class="row">
-          <button
-             mat-mini-fab color="warn"
+        <button
+            mat-mini-fab color="warn"
             (click)="openretiro()"
-            aria-label="agregar"
+            aria-label="salir"
             *ngIf="disableretiro"
           >
-            <i
-              class="far fa-window-close"></i>
+            <i class="far fa-times-circle"></i>
           </button>
-        </div>
+          <button
+            (blur)="onBlur('estado')"
+            mat-raised-button color="primary"
+            aria-label="actualizar estado"
+            *ngIf="disableretiro"
+          >
+            Actualizar
+          </button>
       </nav>
 
       <div
@@ -148,7 +153,6 @@
               class="example-full-width col"
           >
               <mat-select
-                (blur)="onBlur('estado')"
                 [(ngModel)]="retiroForm.estado"
               >
                 <mat-option

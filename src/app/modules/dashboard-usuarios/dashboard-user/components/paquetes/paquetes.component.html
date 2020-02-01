@@ -4,7 +4,6 @@
 >
   <div
     class="column"
-    *ngIf="!disable"
   >
     <div class="column content">
       <nav
@@ -14,9 +13,9 @@
       </nav>
       <div class="row p-3 d-flex justify-content-center ">
         <div
-          class="col-9 col-sm-4 col-lg-3 separar"
+          class="col-9 col-sm-7 col-lg-4 separar"
         >
-          <div class="column" *ngFor="let pro of paquetes; index as i">
+          <div class="column" *ngFor="let pro of paquetes; let idx=index">
             <div class="column">
               <div class="mat-elevation-z3 column ancho" style="width: 150%;">
                 <div class="d-flex justify-content-center">
@@ -43,13 +42,14 @@
                 <div class="d-flex justify-content-center">
                   <div class="column">
                     <div class="d-flex justify-content-center">
-                      <a href="{{ pro.url }}" target="_blank">
+                      <a href="{{ pro.url }}" target="_blank" *ngIf="!disable">
                         <img src="https://369969691f476073508a-60bf0867add971908d4f26a64519c2aa.ssl.cf5.rackcdn.com/btns/btn1.png" alt="none" width="215px">
                       </a>
+                      <div class="m" *ngIf="disable" class="p-2 mb-1 bg-primary text-white rounded">
+                        <h5>!Ops Todavia Tienes Un Paquete Activo!</h5>
+                        <p>Por Favor Esperar Que Se Consuma Tu Paquete</p>
+                      </div>
                       <br>
-                    </div>
-                    <div class="">
-                      <p> {{ " " }}</p>
                     </div>
                     <div class="d-flex justify-content-center p-3 mb-2 bg-dark text-white rounded">
                       <div class="d-flex justify-content-center p-1">
@@ -62,7 +62,7 @@
               </div>
               <br>
               <br>
-              <div class="mat-elevation-z3 column ancho" style="width: 150%;" *ngIf="index == 1">
+              <div class="mat-elevation-z3 column ancho" style="width: 150%;" *ngIf="idx == 1">
                 <div class="d-flex justify-content-center p-3 mb-2 bg-dark text-white rounded">
                   <div class="d-flex justify-content-center p-1">
                     <br>
@@ -95,7 +95,7 @@
       </div>
     </div>
   </div>
-  <div
+  <!--<div
     *ngIf="disable"
     class="p-3 mb-2 bg-primary text-white justify-content-center rounded column"
     fxLayoutAlign="space-around center"
@@ -105,5 +105,5 @@
       <h3>!Ops Todavia Tienes Un Paquete Activo!</h3>
       <h5>Por Favor Esperar Que Se Consuma Tu Paquete</h5>
     </div>
-  </div>
+  </div>-->
 </div>

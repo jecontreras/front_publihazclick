@@ -231,7 +231,7 @@ export class UsuariosComponent implements OnInit {
             x_id_factura: this.codigo() + ' factura',
             x_currency_code: this.codigo(),
             x_respuesta: 'Aceptada',
-            x_amount: this.paquete === 'basico' ? 30000 : 125000,
+            x_amount: this.paquete === 'basico' ? 33000 : 253000,
             x_description: this.paquete === 'basico' ? 'Paquete Basico' : 'Paquete Emprendedor',
             x_bank_name: 'Manual',
             x_transaction_id: this.codigo() + ' x_transaction_id',
@@ -246,11 +246,11 @@ export class UsuariosComponent implements OnInit {
           }
           ;
           console.log('PEticion para activar paquete');
-          console.log(parametros);
+          //console.log(parametros);
         return this._factory.create('paquete/comprado', parametros)
           .subscribe(
             (res: any) => {
-              console.log(res);
+              //console.log(res);
               swal('Ok', `
       El paquete se activo exitosamente
       ` , 'success');
@@ -274,7 +274,7 @@ export class UsuariosComponent implements OnInit {
   }
   buscar() {
     this.loader = true;
-    console.log(this.datoBusqueda);
+    //console.log(this.datoBusqueda);
     this.datoBusqueda = this.datoBusqueda.trim();
     if (this.datoBusqueda === '') {
       this.cargarTodos();
@@ -287,7 +287,7 @@ export class UsuariosComponent implements OnInit {
           }
         }).subscribe(
           (response: any) => {
-            console.log(response);
+            //console.log(response);
             this.dataTable.headerRow = ['Name', 'Lastname', 'Username', 'Cabeza', 'Email', 'Acciones'];
             this.dataTable.footerRow = ['Name', 'Lastname', 'Username', 'Cabeza', 'Email', 'Acciones'];
             this.dataTable.dataRows = response.data;

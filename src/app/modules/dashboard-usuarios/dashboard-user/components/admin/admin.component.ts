@@ -291,12 +291,14 @@ export class AdminComponent implements OnInit {
       this._bancos.updateretiro(query)
         .subscribe(
           (res: any) => {
-            // console.log(res);
+            console.log(res);
             if (res.id) {
               this._tools.openSnack('Actualizado Retiro', 'Completado', false);
               this.estadopuntos(res);
               if (res.pagopaquete) {
-                this.createnota(res);
+                if(res.pagopaquete === 20000){
+                  if(res.estado === 'completado')this.createnota(res);
+                }
               }
             }
           }
@@ -314,9 +316,8 @@ export class AdminComponent implements OnInit {
           tipo: 'notificaciones',
           user: this._model.user.id,
           descripcion: 'consumir paquete que pagaste por el ultimo retiro de dinero',
-          valor: res.pagopaquete
-        }
-        ;
+          valor: 33000
+        };
       this._bancos.getnota({
         where: {
           ids: query.ids,
@@ -325,9 +326,9 @@ export class AdminComponent implements OnInit {
       })
         .subscribe(
           (rta: any) => {
-            // console.log(rta);
+            //console.log(rta);
             if (!rta.data.length) {
-              this._bancos.createnota(query)
+              this._bancos.createnotapaquete(query)
                 .subscribe(
                   () => {
                     // console.log(res);

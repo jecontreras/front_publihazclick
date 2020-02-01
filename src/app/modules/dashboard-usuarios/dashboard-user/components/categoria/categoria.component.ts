@@ -17,8 +17,10 @@ export class CategoriaComponent implements OnInit {
     // console.log(this.data)
     this._model.query('nivel', {}).subscribe(
       (response: any) => {
-        console.log(response);
         this.listCategoria = response.data;
+        for(let row of this.listCategoria){
+          row.recompActivacionInvitados=(row.recompActivacionInvitados*5);
+        }
       },
       (error: any) => {
         console.log(error);

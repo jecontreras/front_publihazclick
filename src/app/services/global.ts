@@ -22,11 +22,11 @@ export const GLOBAL = {
 
 
   /* ------------------- Variables de Produccion  ------------- */
-   /* urlFront: 'http://publihazclick.com/',
+   /*urlFront: 'http://publihazclick.com/',
    url: 'http://api.publihazclick.com/',
    estadoPruebaPagos: false,
    keyEpayco: '622948e11f5c849086ae425e6d685741',
-   estadoApp: 'Prod', */
+   estadoApp: 'Prod',*/
 
 
    version: '1.8'

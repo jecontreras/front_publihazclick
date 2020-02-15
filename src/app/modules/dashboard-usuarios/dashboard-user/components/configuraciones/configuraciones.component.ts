@@ -388,7 +388,7 @@ export class ConfiguracionesComponent implements OnInit {
     this._configuracion.getBanner({
       where:{
         user: this._model.user.id,
-        type: 'banner'
+        type: 'banner',
       }
     })
     .subscribe(
@@ -397,7 +397,9 @@ export class ConfiguracionesComponent implements OnInit {
         res = res.data;
         this.banneritems = res;
         if(res.length){
-          this.disabledcreatebanner = true;
+          for(let row of res){
+            if(row.estado == 'activo' && row.clicks <=100) this.disabledcreatebanner = true;
+          }
         }
       }
     )

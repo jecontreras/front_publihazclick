@@ -41,8 +41,8 @@ export class FactoryModelService {
     // console.log(this.user);
     if (this._auth.canActivate()) {
       this.query('user', {
-          id: this.user.id,
-          // id: "5d5adac13992c33d1d506381"
+          //id: this.user.id,
+           id: "5e18a49270ec4155e5e57bb7"
       })
         .subscribe(
           (response: any) => {

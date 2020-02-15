@@ -3,7 +3,7 @@
 >
   <div>
     <nav
-      class="navbar navbar-dark bg-primary justify-content-center rounded"
+      class="bg-info justify-content-center rounded"
     >
       <ul class="nav justify-content-center">
         <li class="nav-item">
@@ -141,9 +141,23 @@
               <ul class="list-group">
                 <li
                   *ngFor="let item of dataActividad"
-                  class="list-group-item"
+                  class="list-group-item container row"
                 >
-                <div class="row list-group-item  bg-info text-white">
+                <div class="row col">
+                  <div class="col-sm-6 col-md-4 text-white">
+                    <label>Fecha de Actividad: </label>
+                    <span>{{ item.create }}</span>
+                  </div>
+                  <div class="col-sm-6 col-md-4">
+                    <label>Actividades Realizado: </label>
+                    <span>{{ item.cantidadrealizado }}</span>
+                  </div>
+                  <div class="col-sm-6 col-md-3">
+                    <label>Actividades No Realizado: </label>
+                    <span>{{ item.cantidadnorealizado }}</span>
+                  </div>
+                </div>
+                <!--<div class="row list-group-item  bg-info text-white">
                   <label>Fecha de Actividad: </label>
                   <span>{{ item.create }}</span>
                 </div>
@@ -154,7 +168,7 @@
                 <div class="row">
                   <label>Actividades No Realizado: </label>
                   <span>{{ item.cantidadnorealizado }}</span>
-                </div>
+                </div>-->
                 </li>
               </ul>
             </div>

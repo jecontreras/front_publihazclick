@@ -28,20 +28,21 @@ export class LoginComponent implements OnInit {
   public disabled: any = false;
   public data: any = {};
   public estadoPeticion: boolean = false;
+  public disablebtnRecuperar: boolean = false;
   // public _publicacion: any;
   constructor(
-      private formBuilder: FormBuilder,
-      private route: ActivatedRoute,
-      private router: Router,
-      private _userService: UserService,
-      private _authSrvice: AuthService,
-      private _tools: ToolsService,
-      private _model: FactoryModelService
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private _userService: UserService,
+    private _authSrvice: AuthService,
+    private _tools: ToolsService,
+    private _model: FactoryModelService
   ) {
     this.user = {};
     if (this._authSrvice.isLoggedIn()) {
       this.userLogeado = JSON.parse(localStorage.getItem('user'));
-      this.userLogeado['rol'] == '5cedd99b520be0ef6856715f'? this.router.navigate(['pages']):this.router.navigate(['dashboard']);
+      this.userLogeado['rol'] == '5cedd99b520be0ef6856715f' ? this.router.navigate(['pages']) : this.router.navigate(['dashboard']);
     }
     // this._model.query('user', false)
     // .subscribe(
@@ -62,65 +63,67 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.loginForm = this.formBuilder.group({
-          username: ['', Validators.required],
-          password: ['', Validators.required]
-      });
-      // this._model.query('paquete', {})
-      // .subscribe(
-      //   (response: any) => {
-      //     console.log(response);
-      //     response = response.data;
-      //       // if (response.length > 0) {
-      //       //   return true;
-      //       // } else {
-      //       //   this.crearPaquetes();
-      //       // }
-      //   },
-      //   (error: any) => {
-      //       console.log('Error', error);
-      //   }
-      // );
-      // // get return url from route parameters or default to '/'
-      // this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.loginForm = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+    // this._model.query('paquete', {})
+    // .subscribe(
+    //   (response: any) => {
+    //     console.log(response);
+    //     response = response.data;
+    //       // if (response.length > 0) {
+    //       //   return true;
+    //       // } else {
+    //       //   this.crearPaquetes();
+    //       // }
+    //   },
+    //   (error: any) => {
+    //       console.log('Error', error);
+    //   }
+    // );
+    // // get return url from route parameters or default to '/'
+    // this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
-  validadEmail(){
+  validadEmail() {
     const
       data: any = this.data
-    ;
+      ;
     this.disabledemail = true;
-    if(data.email){
+    if (data.email) {
       const
         filtro: any = data.email.split('@', '2')
-      ;
+        ;
       // console.log(filtro);
-      if(filtro[1] !== 'gmail.com'){
+      if (filtro[1] !== 'gmail.com') {
         this.disabledemail = false;
       }
     }
   }
-  submitCorreo(){
+  submitCorreo() {
     const
       data: any = this.data
-    ;
-    this._model.query('user/correo',{
-      where:{
+      ;
+    this.disablebtnRecuperar = true;
+    this._model.query('user/correo', {
+      where: {
         email: data.email
       }
     })
-    .subscribe(
-      (res: any)=>{
-        // console.log(res);
-        if(res.status === 200){
-          swal( 'ok' ,  'Se Te a Enviado una Clave a tu correo!' ,  'success' );
-          this.reContrasena = false;
-          this.data = {};
-        }else{
-          swal( 'Oops' ,  'La Contraseña son incorrectos!' ,  'error' );
-        }
-        return res;
-      }
-    );
+      .subscribe(
+        (res: any) => {
+          // console.log(res);
+          this.disablebtnRecuperar = false;
+          if (res.status === 200) {
+            swal('ok', 'Se Te a Enviado una Clave a tu correo!', 'success');
+            this.reContrasena = false;
+            this.data = {};
+          } else {
+            swal('Oops', 'No Podimos enviar el correo por favor comunicate al servicio al cliente!', 'error');
+          }
+          return res;
+        }, (error) => { this.disablebtnRecuperar = false; swal('Oops', 'No Podimos enviar el correo por favor comunicate al servicio al cliente!', 'error'); }
+      );
   }
 
   get f() { return this.loginForm.controls; }
@@ -141,38 +144,38 @@ export class LoginComponent implements OnInit {
             // console.log(response);
             localStorage.setItem('user', JSON.stringify(response.data));
             this.userLogeado = JSON.parse(localStorage.getItem('user'));
-      this.userLogeado['rol'] == '5cedd99b520be0ef6856715f'? this.router.navigate(['pages']):this.router.navigate(['dashboard']);
+            this.userLogeado['rol'] == '5cedd99b520be0ef6856715f' ? this.router.navigate(['pages']) : this.router.navigate(['dashboard']);
           } else {
-            swal( 'Oops' ,  'El usuario o la contraseña son incorrectos!' ,  'error' );
+            swal('Oops', 'El usuario o la contraseña son incorrectos!', 'error');
           }
           this.estadoPeticion = false;
         },
         error => {
-          swal( 'Error' ,  'Problema con el servidor!' ,  'error' );
+          swal('Error', 'Problema con el servidor!', 'error');
           console.log(<any>error);
           this.estadoPeticion = false;
         }
       );
     }
     // this.user = this.userService.login()
-      // this.submitted = true;
-      //
-      // // stop here if form is invalid
-      // if (this.loginForm.invalid) {
-      //     return;
-      // }
-      //
-      // this.loading = true;
-      // // this.authenticationService.login(this.f.username.value, this.f.password.value)
-      // //     .pipe(first())
-      // //     .subscribe(
-      // //         data => {
-      // //             this.router.navigate([this.returnUrl]);
-      // //         },
-      // //         error => {
-      // //             this.alertService.error(error);
-      // //             this.loading = false;
-      // //         });
+    // this.submitted = true;
+    //
+    // // stop here if form is invalid
+    // if (this.loginForm.invalid) {
+    //     return;
+    // }
+    //
+    // this.loading = true;
+    // // this.authenticationService.login(this.f.username.value, this.f.password.value)
+    // //     .pipe(first())
+    // //     .subscribe(
+    // //         data => {
+    // //             this.router.navigate([this.returnUrl]);
+    // //         },
+    // //         error => {
+    // //             this.alertService.error(error);
+    // //             this.loading = false;
+    // //         });
 
   }
 

@@ -41,8 +41,8 @@ export class FactoryModelService {
     // console.log(this.user);
     if (this._auth.canActivate()) {
       this.query('user', {
-          //id: this.user.id,
-           id: "5e18a49270ec4155e5e57bb7"
+          id: this.user.id,
+          //id: "5d1f8197de40d4453a8a8d87"
       })
         .subscribe(
           (response: any) => {
@@ -71,6 +71,27 @@ export class FactoryModelService {
           }
         );
     }
+    // this.query('userpaquete', {
+    //   where:{
+    //     createdAt: {
+    //       '>=': "2020-02-29T00:00:00.185+00:00",
+    //       '<=': "2020-03-27T00:00:00.185+00:00"
+    //     },
+    //     x_respuesta: "Aceptada"
+    //   }
+    // }).subscribe((res:any)=>{ 
+    //   console.log(res);
+    //   for(let row of res.data){
+    //     let data:any = {
+    //       id: row.id,
+    //       createdAt: moment(row.createdAt).add(6, 'days') //.format('YYYY-MM-DD HH:MM:SS')
+    //     };
+    //     console.log(data);
+    //     this.update('userpaquete', data.id, data).subscribe((res:any)=>{
+    //       console.log(res);
+    //     });
+    //   }
+    // });
   }
   cargarNivel() {
     // console.log(this.user);

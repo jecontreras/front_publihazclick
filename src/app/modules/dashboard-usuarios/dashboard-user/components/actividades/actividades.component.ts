@@ -111,4 +111,7 @@ export class ActividadesComponent implements OnInit {
     /* this.breakpoint = (window.innerWidth <= 400) ? 1 : 6;
     this.loadPublicaciones(); */
   }
+  cambiarEstado(obj:any){
+    obj.estado='completado'
+  }
 }

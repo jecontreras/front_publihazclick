@@ -30,10 +30,11 @@
                 </div>
                 <div class="p container" style="padding: 10%;" fxLayout="column" fxLayoutAlign="center center">
                   <mat-card *ngFor="let item of cuerpo.actividades" class="m p ancho border border-light"
+                    (click)="cambiarEstado(item)"
                     mat-raised-button color="primary" [ngClass]="{
                     'disable':item.estado !== 'activo'
                  }">
-                    <mat-card-header [routerLink]="['/dashboard/view_perfil', item.user.id]" class="rounded pointer">
+                    <mat-card-header [routerLink]="['/dashboard/view_perfil', item.publicacion.user.id]" class="rounded pointer">
                       <div mat-card-avatar class="example-header-image">
                         <picture>
                           <img *ngIf="item.user" class="rounded-circle perfil-img rounded" height="40px" width="100%"
@@ -103,10 +104,11 @@
                 </div>
                 <div class="p container" style="padding: 10%;" fxLayout="column" fxLayoutAlign="center center">
                   <mat-card *ngFor="let item of cuerpo.actividadesextras" class="m p ancho border border-light"
+                    (click)="cambiarEstado(item)"
                     mat-raised-button color="primary" [ngClass]="{
                      'disable':item.estado !== 'activo'
                   }">
-                    <mat-card-header class="rounded ">
+                    <mat-card-header [routerLink]="['/dashboard/view_perfil', item.publicacion.user.id]" class="rounded pointer">
                       <div mat-card-avatar class="example-header-image">
                         <picture>
                           <img *ngIf="item.user" class="rounded-circle perfil-img rounded" height="40px" width="100%"
@@ -172,14 +174,15 @@
                 </div>
                 <div class="p container" style="padding: 10%;" fxLayout="column" fxLayoutAlign="center center">
                   <mat-card *ngFor="let item of cuerpo.actividadreferidos" class="m p ancho border border-light"
+                    (click)="cambiarEstado(item)"
                     mat-raised-button color="primary" [ngClass]="{
                      'disable':item.estado !== 'activo'
                   }">
-                    <mat-card-header class="rounded ">
+                    <mat-card-header [routerLink]="['/dashboard/view_perfil', item.publicacion.user.id]" class="rounded pointer">
                       <div mat-card-avatar class="example-header-image">
                         <picture>
                           <img *ngIf="item.user" class="rounded-circle perfil-img rounded" height="40px" width="100%"
-                            src="{{item.user.foto}}" alt="Perfil user">
+                          src="{{item.publicacion.user.foto}}" alt="Perfil user">
                           ​</picture>
                       </div>
                       <mat-card-title *ngIf="item.user">

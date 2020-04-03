@@ -79,7 +79,7 @@ url(https://s3.amazonaws.com/publihazclick/default/fondo.jpg);
               <button type="button" class="btn btn-primary" (click)="reContrasena=!reContrasena">
                 Atras
               </button>
-              <button type="button" class="btn btn-success" (click)="submitCorreo()">
+              <button type="button" class="btn btn-success" (click)="submitCorreo()" [disabled]="disablebtnRecuperar">
                 Enviar
               </button>
             </div>

@@ -56,6 +56,10 @@ export class RegistryComponent implements OnInit {
     this.listdepartamento = departamento;
     this.listpais = pais;
     // console.log(this.listdepartamento);
+    this.crearForm();
+    this.getCabeza();
+  }
+  crearForm(){
     this.registerForm = this.formBuilder.group({
       name: ['', Validators.required],
       username: ['', Validators.required],
@@ -64,13 +68,12 @@ export class RegistryComponent implements OnInit {
       celular: ['', [Validators.required, Validators.minLength(10)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirpassword: ['', [Validators.required, Validators.minLength(6)]],
-      cabeza: [this.cabeza, [Validators.required]],
+      cabeza: [ this.cabeza, [Validators.required]],
       pais: ['Colombia'],
       departamento: [''],
       ciudad: [''],
       aceptarpoliticas: ['h', [Validators.required]]
     });
-    this.getCabeza();
   }
   getCabeza() {
     this.userService.cabeza(this.cabeza)
@@ -79,7 +82,8 @@ export class RegistryComponent implements OnInit {
           res = res.data[0];
           // console.log(res);
           if (!res) {
-            this.disabledcabeza = false;
+            // this.disabledcabeza = false;
+            this.cabeza = "joseeduardo112";
           }
         }
       )
@@ -112,15 +116,15 @@ export class RegistryComponent implements OnInit {
       data: any = this.registerForm.value
       ;
     this.disabledemail = true;
-    if (data.email) {
-      const
-        filtro: any = data.email.split('@', '2')
-        ;
-      // console.log(filtro);
-      if (filtro[1] !== 'gmail.com') {
-        this.disabledemail = false;
-      }
-    }
+    // if (data.email) {
+    //   const
+    //     filtro: any = data.email.split('@', '2')
+    //     ;
+    //   // console.log(filtro);
+    //   if (filtro[1] !== 'gmail.com') {
+    //     this.disabledemail = false;
+    //   }
+    // }
   }
   validadPassword(opt: any) {
     const
@@ -172,15 +176,16 @@ export class RegistryComponent implements OnInit {
     // console.log(this.registerForm.value);
     if (this.disabledemail && this.disabledusername && this.registerForm.value.departamento && this.registerForm.value.pais
       && this.registerForm.value.ciudad && this.registerForm.value.password === this.registerForm.value.confirpassword) {
-      this.userService.register(this.registerForm.value).subscribe(
+        let data:any = this.registerForm.value;
+        if(!data.cabeza) data.cabeza = "joseeduardo112";
+      this.userService.register( data ).subscribe(
         (response: any) => {
           // console.log(response);
           if (response.status === 200) {
             // TODO Funcionalidad de verificacion
             this.verificacion = true;
             swal('Ok!',
-              'Registro completo! Falta Que Actives Tu Cuenta En Gmail Te Enviamos Un Correo de Verificacion a Tu Email: '
-              + this.registerForm.value.email, 'success');
+              `Tu Email  ${ this.registerForm.value.email } Username ${ this.registerForm.value.username } Password ${ this.registerForm.value.password }`, 'success');
             localStorage.setItem('user', JSON.stringify(response.data));
             this.router.navigate(['dashboard']);
           } else {
@@ -188,7 +193,8 @@ export class RegistryComponent implements OnInit {
           }
         },
         error => {
-          swal('Error!', 'Los datos son incorrectos o el usuario ya existe!', 'error');
+          console.log( error );
+          swal('Error!', `Los datos son incorrectos mesaje ${ error.error.message }!`, 'error');
         }
       );
     } else {

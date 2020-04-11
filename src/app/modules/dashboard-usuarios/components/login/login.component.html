@@ -71,9 +71,9 @@ url(https://s3.amazonaws.com/publihazclick/default/fondo.jpg);
               <label>Email de Tu Usuario Gmail</label>
               <input type="email" placeholder="Correo Electronico" [(ngModel)]="data.email" (blur)="validadEmail()"
                 required class="form-control white-text">
-              <div *ngIf="!disabledemail">
+              <!-- <div *ngIf="!disabledemail">
                 <span class="bg-danger text-white rounded">El Email Solo Seran Correos Con Dominio Gmail</span>
-              </div>
+              </div> -->
             </div>
             <div fxLayout="row" fxLayoutAlign="center">
               <button type="button" class="btn btn-primary" (click)="reContrasena=!reContrasena">

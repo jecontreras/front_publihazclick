@@ -7,6 +7,7 @@ export const GLOBAL = {
    estadoPruebaPagos: true,
    keyEpayco: '622948e11f5c849086ae425e6d685741',
    estadoApp: 'Dev',
+   version: '1.8'
 
 
 
@@ -29,5 +30,5 @@ export const GLOBAL = {
   //  estadoApp: 'Prod',
 
 
-   version: '1.8'
+  //  version: '1.8'
 };

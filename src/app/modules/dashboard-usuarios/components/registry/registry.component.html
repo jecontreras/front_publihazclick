@@ -17,7 +17,7 @@
                 <div class="md-form col-md-6">
                   <label for="Form-name5">Nombres Completos</label>
                   <input type="text" required placeholder="Nombre Completo" formControlName="name"
-                    class="form-control white-text" maxlength="30" minlength="3">
+                    class="form-control white-text colorInput" maxlength="30" minlength="3">
                   <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
                     <div *ngIf="f.firstName.errors.required">First Name is required</div>
                   </div>
@@ -25,7 +25,7 @@
                 <div class="md-form col-md-6">
                   <label for="Form-surname5">Apellidos</label>
                   <input required type="text" placeholder="Apellidos Completos" formControlName="lastname"
-                    class="form-control white-text" maxlength="30" minlength="3"
+                    class="form-control white-text colorInput" maxlength="30" minlength="3"
                     [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }">
                   <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
                     <div *ngIf="f.lastName.errors.required">Last Name is required</div>
@@ -37,18 +37,18 @@
                   <label for="Form-email5">Email</label>
                   <input type="email" placeholder="Correo Electronico" formControlName="email" (blur)="validadEmail()"
                     required [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }"
-                    class="form-control white-text" maxlength="40" minlength="3">
+                    class="form-control white-text colorInput" maxlength="40" minlength="3">
                   <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
                     <div *ngIf="f.lastName.errors.required">Last Name is required</div>
                   </div>
-                  <div *ngIf="!disabledemail">
+                  <!-- <div *ngIf="!disabledemail">
                     <span class="bg-danger text-white rounded">El Email Solo Seran Correos Con Dominio Gmail</span>
-                  </div>
+                  </div> -->
                 </div>
                 <div class="md-form col-md-6">
                   <label for="Form-email5">Nombre de Usuario / Avatar</label>
                   <input type="text" placeholder="Nombre Unico" formControlName="username" (blur)="validadUsername()"
-                    [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" class="form-control white-text"
+                    [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" class="form-control white-text colorInput"
                     maxlength="15" minlength="5">
                   <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
                     <div *ngIf="f.lastName.errors.required">Last Name is required</div>
@@ -64,7 +64,7 @@
                   <label for="Form-email5">Contraseña</label>
                   <input placeholder="Contraseña que  Recuerde Ejemplo:123456" type="password"
                     formControlName="password" required (blur)="validadPassword(true)"
-                    [ngClass]="{ 'is-invalid': submitted && f.username.errors }" class="form-control white-text"
+                    [ngClass]="{ 'is-invalid': submitted && f.username.errors }" class="form-control white-text colorInput"
                     maxlength="30" minlength="6">
                   <div *ngIf="!disabledPassCount">
                     <span class="bg-danger text-white rounded">Las Contraseñas Debe tener ALmenos 6 Caracteres</span>
@@ -74,7 +74,7 @@
                   <label for="Form-email5">Confirmar Contraseña</label>
                   <input type="password" placeholder="No Puedes Olvidar Tu Contraseña" formControlName="confirpassword"
                     required maxlength="30" minlength="6" (blur)="validadPassword(false)"
-                    [ngClass]="{ 'is-invalid': submitted && f.password.errors }" class="form-control white-text">
+                    [ngClass]="{ 'is-invalid': submitted && f.password.errors }" class="form-control white-text colorInput">
                   <div *ngIf="!disabledpassword">
                     <span class="bg-danger text-white rounded">Las Contraseñas No son Iguales</span>
                   </div>
@@ -85,7 +85,7 @@
                   <label for="Form-email5">Celular</label>
                   <input placeholder="Celular de Contacto" type="number" formControlName="celular" required
                     maxlength="10" [ngClass]="{ 'is-invalid': submitted && f.celular.errors }"
-                    class="form-control white-text">
+                    class="form-control white-text colorInput">
                   <div *ngIf="submitted && f.celular.errors" class="invalid-feedback">
                     <div *ngIf="f.celular.errors.required">celular is required</div>
                     <div *ngIf="f.celular.errors.minlength">celular must be at least 10 characters</div>
@@ -95,7 +95,7 @@
                   <label for="Form-email5">Patrocinador</label>
                   <input type="text" placeholder="Patrocinador nombre unico de su lider " formControlName="cabeza"
                     [ngClass]="{ 'is-invalid': submitted && f.cabeza.errors }" disabled="true" required
-                    class="form-control white-text">
+                    class="form-control white-text colorInput">
                   <div *ngIf="submitted && f.cabeza.errors" class="invalid-feedback">
                     <div *ngIf="f.cabeza.errors.required">cabeza is required</div>
                     <div *ngIf="f.cabeza.errors.minlength">cabeza must be at least 10 characters</div>
@@ -105,7 +105,7 @@
               <div class="row">
                 <div class="md-form col-md-2">
                   <label for="Form-email5">Pais</label>
-                  <select class="custom-select" formControlName="pais" (blur)="viewpais()">
+                  <select class="custom-select colorInput" formControlName="pais" (blur)="viewpais()">
                     <option value="{{ item.name }}" *ngFor="let item of listpais">
                       {{ item.name}}
                     </option>
@@ -114,7 +114,7 @@
                 <div class="md-form col-md-5">
                   <div class="" *ngIf="!disabledpais">
                     <label for="Form-email5">Departamento</label>
-                    <select class="custom-select" formControlName="departamento" (blur)="blurdepartamento()">
+                    <select class="custom-select colorInput" formControlName="departamento" (blur)="blurdepartamento()">
                       <option value="{{item.departamento}}" *ngFor="let item of listdepartamento">
                         {{ item.departamento}}
                       </option>
@@ -124,13 +124,13 @@
                     <label for="Form-email5">Estado / Provincia</label>
                     <input type="text" placeholder="Estdo O provincia " formControlName="departamento"
                       [ngClass]="{ 'is-invalid': submitted && f.cabeza.errors }" required
-                      class="form-control white-text">
+                      class="form-control white-text colorInput">
                   </div>
                 </div>
                 <div class="md-form col-md-5">
                   <div class="" *ngIf="!disabledpais">
                     <label for="Form-email5">Ciudad Donde Vives</label>
-                    <select class="custom-select" formControlName="ciudad">
+                    <select class="custom-select colorInput" formControlName="ciudad">
                       <option value="{{ item }}" *ngFor="let item of listciudades">
                         {{ item}}
                       </option>
@@ -140,7 +140,7 @@
                     <label for="Form-email5">Ciudad / Municipio Donde Vives</label>
                     <input type="text" placeholder="Ciudad de localidad" formControlName="ciudad"
                       [ngClass]="{ 'is-invalid': submitted && f.cabeza.errors }" required
-                      class="form-control white-text">
+                      class="form-control white-text colorInput">
                   </div>
                 </div>
               </div>

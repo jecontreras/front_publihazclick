@@ -95,9 +95,9 @@ export class LoginComponent implements OnInit {
         filtro: any = data.email.split('@', '2')
         ;
       // console.log(filtro);
-      if (filtro[1] !== 'gmail.com') {
-        this.disabledemail = false;
-      }
+      // if (filtro[1] !== 'gmail.com') {
+      //   this.disabledemail = false;
+      // }
     }
   }
   submitCorreo() {
@@ -105,25 +105,30 @@ export class LoginComponent implements OnInit {
       data: any = this.data
       ;
     this.disablebtnRecuperar = true;
-    this._model.query('user/correo', {
-      where: {
-        email: data.email
-      }
-    })
-      .subscribe(
-        (res: any) => {
-          // console.log(res);
-          this.disablebtnRecuperar = false;
-          if (res.status === 200) {
-            swal('ok', 'Se Te a Enviado una Clave a tu correo!', 'success');
-            this.reContrasena = false;
-            this.data = {};
-          } else {
-            swal('Oops', 'No Podimos enviar el correo por favor comunicate al servicio al cliente!', 'error');
-          }
-          return res;
-        }, (error) => { this.disablebtnRecuperar = false; swal('Oops', 'No Podimos enviar el correo por favor comunicate al servicio al cliente!', 'error'); }
-      );
+    this.reContrasena = true;
+    let url:string = `https://wa.me/573232863662?text=Hola Servicio al cliente, como esta, saludo cordial, necesito recuperar las credenciales de mi cuenta ${ data.email } `;
+    swal('ok', 'Por Favor Esperar que el servicio el cliente se ponga en contacto con tigo!', 'success');
+    window.open( url );
+    this.disablebtnRecuperar = false;
+    // this._model.query('user/correo', {
+    //   where: {
+    //     email: data.email
+    //   }
+    // })
+    //   .subscribe(
+    //     (res: any) => {
+    //       // console.log(res);
+    //       this.disablebtnRecuperar = false;
+    //       if (res.status === 200) {
+    //         swal('ok', 'Se Te a Enviado una Clave a tu correo!', 'success');
+    //         this.reContrasena = false;
+    //         this.data = {};
+    //       } else {
+    //         swal('Oops', 'No Podimos enviar el correo por favor comunicate al servicio al cliente!', 'error');
+    //       }
+    //       return res;
+    //     }, (error) => { this.disablebtnRecuperar = false; swal('Oops', 'No Podimos enviar el correo por favor comunicate al servicio al cliente!', 'error'); }
+    //   );
   }
 
   get f() { return this.loginForm.controls; }

@@ -125,7 +125,6 @@
               "./node_modules/jquery/dist/jquery.min.js",
               "./node_modules/popper.js/dist/umd/popper.min.js",
               "./node_modules/bootstrap/dist/js/bootstrap.min.js"
-
             ],
             "assets": [
               "src/favicon.ico",
@@ -176,5 +175,8 @@
       }
     }
   },
-  "defaultProject": "publiClickFrontend"
+  "defaultProject": "publiClickFrontend",
+  "cli": {
+    "analytics": "a8217d3a-2727-4d16-b562-a09c2b96f81a"
+  }
 }

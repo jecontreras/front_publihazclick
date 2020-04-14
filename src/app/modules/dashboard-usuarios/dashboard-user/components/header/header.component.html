@@ -120,7 +120,8 @@
             class="marginLeft"
           >
             <span class="p"><i class="fas fa-at" style="margin-right: 5px;"></i>{{ user.username }}</span>
-            <span class="p"><i class="fas fa-chess-queen" style="margin-right: 5px;"></i>{{ this._model.user.titleNivel }}</span>
+            <span *ngIf="this._model.user.titleNivel == 'GRATUITO'"  class="p"><i class="fas fa-chess-queen" style="margin-right: 5px;"></i>PRINCIPIANTE</span>
+            <span *ngIf="this._model.user.titleNivel != 'GRATUITO'"class="p"><i class="fas fa-chess-queen" style="margin-right: 5px;"></i>{{ this._model.user.titleNivel }}</span>
           </h6>
         </div>
       </div>

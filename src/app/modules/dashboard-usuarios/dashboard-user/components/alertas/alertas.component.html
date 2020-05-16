@@ -13,4 +13,18 @@
     </li>
   </ul>
 
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let item of listActivacion; let indice=index">
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <strong>¡{{ item.titulo }}!</strong> {{ item.descripcion }}
+          <button *ngIf="item.valor" type="button"  aria-label="Consumir" (click)="eventpaquete(null, item, 'paquete', true)">
+            Activar
+          </button>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="this.listActivacion.splice(indice, 1)">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+    </li>
+  </ul>
+
 </div>

@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Config } from 'protractor';
 import { catchError } from 'rxjs/operators';
+import { FactoryModelService } from 'src/app/services/factory-model.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,11 +17,15 @@ export class PaquetesService {
   public user: any;
 
   constructor(
-    private _http: HttpClient
+    private _model: FactoryModelService,
   ) {
       this.url = GLOBAL.url;
       this.handleError = handleError;
       this.user = JSON.parse(localStorage.getItem('user'));
+  }
+
+  reportar(query: any){
+    return this._model.create('retiros/restarpuntos', query);
   }
   /* pagoPayu(item: any): Observable<Config> {
     console.log(this.datosPayu.referenceCode);

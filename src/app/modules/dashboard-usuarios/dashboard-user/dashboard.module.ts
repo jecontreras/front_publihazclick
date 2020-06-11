@@ -33,6 +33,7 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { ShareModule } from '@ngx-share/core';
 import { ViewPerfilComponent } from './components/view-perfil/view-perfil.component';
 import { CategoriaComponent } from './components/categoria/categoria.component';
+import { NgImageSliderModule } from 'ng-image-slider';
 // Componentes
 
 @NgModule({
@@ -64,6 +65,7 @@ import { CategoriaComponent } from './components/categoria/categoria.component';
     CommonModule,
     HttpClientModule,
     FroalaEditorModule.forRoot(), FroalaViewModule.forRoot(),
+    NgImageSliderModule,
     ShareModule,
     RouterModule,
     FlexLayoutModule,

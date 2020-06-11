@@ -58,6 +58,7 @@
     "md5": "^2.2.1",
     "moment": "2.24.0",
     "moment-timezone": "0.5.25",
+    "ng-image-slider": "^2.5.0",
     "ng-recaptcha": "^4.3.0",
     "ng2-nouislider": "1.8.2",
     "ng2-select": "2.0.0",

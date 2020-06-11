@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  wsUrl: 'http://api.publihazclick.com/'
+  wsUrl: 'https://backpublihazclick.herokuapp.com/'
 };
 
 /*

@@ -1,12 +1,16 @@
-<!-- <footer>
+<footer>
   <div class="p-2 text-white ancho rounded">
     <div fxLayout="row">
       <div fxFlex>
-        <p>Copyright © 2017-2020 PUBLIHAZCLICK. All rights reserved.</p>
+        <ng-image-slider [images]="imageObject" [infinite]="sliderInfinite" [imagePopup]="sliderImagePopup"
+          [showArrow]="sliderArrowShow" [imageSize]="{width: sliderImageWidth, height: sliderImageHeight}"
+          [autoSlide]="sliderAutoSlide ? 1 : 0" [slideImage]="sliderSlideImage" [animationSpeed]="sliderAnimationSpeed"
+          (imageClick)="imageOnClick($event)" (arrowClick)="arrowOnClick($event)"
+          (lightboxArrowClick)="lightboxArrowClick($event)" #nav>
+        </ng-image-slider>
       </div>
-      <a href="#" class="text-white nav-link">Contactos</a>
-      <a href="#" class="text-white nav-link">Terminos y Condiciones</a>
+      <!-- <a href="#" class="text-white nav-link">Contactos</a>
+      <a href="#" class="text-white nav-link">Terminos y Condiciones</a> -->
     </div>
   </div>
 </footer>
- -->

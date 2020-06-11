@@ -36,6 +36,8 @@ const config: SocketIoConfig = {
   url: GLOBAL.url,
   options: {}
 };
+import { NgImageSliderModule } from 'ng-image-slider';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,6 +60,7 @@ const config: SocketIoConfig = {
     ShareModule,
     ReactiveFormsModule,
     FormsModule,
+    NgImageSliderModule,
     MyOwnCustomMaterialModule,
     AppRoutingModule,
     BrowserAnimationsModule,

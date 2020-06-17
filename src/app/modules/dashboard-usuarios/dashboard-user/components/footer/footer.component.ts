@@ -43,15 +43,15 @@ export class FooterComponent implements OnInit {
       this.imageObject.push({
         image: `./assets/banner/${count}.jpeg`,
         thumbImage: `./assets/banner/${count}.jpeg`,
-        alt: 'https://lamejorfabricadeca.wixsite.com/misitio-1',
+        //alt: 'https://lamejorfabricadeca.wixsite.com/misitio-1',
         id: i,
       });
     }
-    console.log(this.imageObject)
+    //console.log(this.imageObject)
   }
 
   openaVenta() {
-    let url: string = `https://publihazclickcom.wixsite.com/misitio`;
+    let url: string = `https://lamejorfabricadeca.wixsite.com/misitio-1`;
     window.open(url);
   }
 
@@ -72,7 +72,8 @@ export class FooterComponent implements OnInit {
   }
 
   imageOnClick(ev:any){
-    console.log("hey");
+    // console.log("hey");
+    this.openaVenta();
   }
 
 }

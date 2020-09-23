@@ -100,7 +100,7 @@ export class FactoryModelService {
     })
       .subscribe(
         (response: any) => {
-          // console.log(response, this.user);
+          //console.log(response, this.user);
           this.user.titleNivel = response.title;
           this.user.nivel = response;
           localStorage.clear();
@@ -138,6 +138,8 @@ export class FactoryModelService {
                   this.user.puntosValor += parseInt(item.valor, 10);
                 }
               }); */
+              //console.log( this.user )
+              delete this.user.puntos;
               localStorage.clear();
               localStorage.setItem('user', JSON.stringify(this.user));
 

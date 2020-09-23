@@ -15,7 +15,7 @@ export class CategoriaComponent implements OnInit {
 
   ngOnInit() {
     // console.log(this.data)
-    this._model.query('nivel', {}).subscribe(
+    this._model.query('nivel', { where:{ }, sort: { createdAt: 'ASC' }}).subscribe(
       (response: any) => {
         this.listCategoria = response.data;
         for(let row of this.listCategoria){

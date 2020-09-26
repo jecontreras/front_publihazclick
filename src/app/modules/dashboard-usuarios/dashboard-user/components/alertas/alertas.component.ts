@@ -19,6 +19,7 @@ export class AlertasComponent implements OnInit {
   public log: any = [];
   public nivelase: boolean = false;
   listActivacion: any = [];
+  disabled:boolean = false;
 
   constructor(
     public _model: FactoryModelService,
@@ -159,6 +160,7 @@ export class AlertasComponent implements OnInit {
       ;
     // console.log(query);
     if (opt === 'paquete') {
+      this.disabled = true;
       this.eventpaquete(indice, data, opt);
     } else {
       this.log.splice(indice, 1);

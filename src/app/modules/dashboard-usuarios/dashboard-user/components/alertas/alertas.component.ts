@@ -42,9 +42,9 @@ export class AlertasComponent implements OnInit {
               titulo: 'Importante',
               mensaje: 'Recuerda que tienes 15 dias para comprar un paquete o tu cuenta sera inhabilitada !'
             });
-            if( this._model.user['puntosValor'] >= 20100 ){
+            /*if( this._model.user['puntosValor'] >= 20100 ){
               this.listActivacion = [ this.formatiando() ];
-            }
+            }*/
           }
         }
         this.chequiarPublicacion();

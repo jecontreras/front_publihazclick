@@ -46,7 +46,7 @@
     "datatables": "1.10.18",
     "datatables.net-bs4": "1.10.19",
     "datatables.net-responsive": "2.2.3",
-    "froala-editor": "^3.0.6",
+    "froala-editor": "^4.0.7",
     "fullcalendar": "3.4.0",
     "googleapis": "40.0.0",
     "hammerjs": "^2.0.8",

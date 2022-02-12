@@ -27,7 +27,7 @@
     "@angular/router": "^7.1.4",
     "@ngx-share/core": "^7.1.4",
     "@types/moment": "^2.13.0",
-    "ajv": "6.10.0",
+    "ajv": "6.12.3",
     "angular-calendar": "0.27.9",
     "angular-froala-wysiwyg": "^3.0.6",
     "animate.css": "3.7.2",
